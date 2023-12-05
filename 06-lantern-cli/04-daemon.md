@@ -4,8 +4,8 @@ With the Lantern CLI Daemon, you can continuously generate embeddings for your P
 
 ## Prerequisites
 
-- [Lantern CLI](/lantern-cli/install)
-- [ONNX Runtime](/lantern-cli/install)
+- [Lantern CLI](/docs/lantern-cli/install)
+- [ONNX Runtime](/docs/lantern-cli/install)
 - Postgres database
 
 ## Architecture

@@ -2,12 +2,12 @@
 
 With Lantern CLI, you can generate embeddings externally to Postgres, without affecting database performance, and import them. This is beneficial for large-scale embedding generation.
 
-For one-off embedding generation, you can use [embedding generation inside Postgres](/02-develop/generate-embeddings) provided by Lantern Extras.
+For one-off embedding generation, you can use [embedding generation inside Postgres](/docs/develop/generate) provided by Lantern Extras.
 
 ## Prerequisites
 
-- [Lantern CLI](/lantern-cli/overview)
-- [ONNX Runtime](/lantern-cli/install-onnx-runtime)
+- [Lantern CLI](/docs/lantern-cli/install)
+- [ONNX Runtime](/docs/lantern-cli/install)
 - Running Postgres database
 
 ## Get Available Models

@@ -6,7 +6,7 @@ This guide assumes that you are self-hosting Postgres with `pgvector`, and that 
 
 Lantern works alongside `pgvector` and is compatible with the `vector` type. If you already have a Postgres database running with `pgvector`, you can easily install and try out Lantern without encountering any issues.
 
-Install Lantern using one of the methods mentioned in the [Getting Started](/getting-started/overview) section. Lantern will automatically detect the presence of the existing `hnsw` access method in your database and create `lantern_hnsw` instead.
+Install Lantern using one of the methods mentioned in the [Getting Started](/docs/getting-started/overview) section. Lantern will automatically detect the presence of the existing `hnsw` access method in your database and create `lantern_hnsw` instead.
 
 Suppose you already have a Postgres table with a vector index created using pgvector, like this:
 

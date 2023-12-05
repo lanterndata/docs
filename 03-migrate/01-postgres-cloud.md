@@ -1,12 +1,12 @@
 # Migrate from Postgres to Lantern Cloud
 
-This guide assumes that you are currently using Postgres without `pgvector`. If you are using `pgvector`, please reference [this guide](/migrate/pgvector-cloud) instead.
+This guide assumes that you are currently using Postgres without `pgvector`. If you are using `pgvector`, please reference [this guide](/docs/migrate/pgvector-cloud) instead.
 
 ## Steps
 
 1. Create a Lantern Cloud database
 
-   Sign up for [Lantern Cloud](https://lantern.dev) and create a database. Obtain a database URL. We'll call this `LANTERN_DATABASE_URL`.
+   Sign up for [Lantern Cloud](/) and create a database. Obtain a database URL. We'll call this `LANTERN_DATABASE_URL`.
 
 2. Backup the Source Database
 

@@ -6,8 +6,8 @@ You can read more about the benchmarking and performance of Lantern Index in [th
 
 ## Prerequisites
 
-- [Lantern CLI](/lantern-cli/install)
-- Postgres database with the [Lantern extension](/lantern-db/install) installed
+- [Lantern CLI](/docs/lantern-cli/install)
+- Postgres database with the [Lantern extension](/docs/lantern-db/install) installed
 
 ## Set Up Data
 
