@@ -6,7 +6,7 @@ This guide assumes that you are using Postgres with `pgvector`, and that you wan
 
 1. Create a Lantern Cloud database
 
-   Sign up for [Lantern Cloud](https://lantern.dev) and create a database. Obtain a database URL. We'll call this `LANTERN_DATABASE_URL`.
+   Sign up for [Lantern Cloud](/) and create a database. Obtain a database URL. We'll call this `LANTERN_DATABASE_URL`.
 
 2. Save pgvector indexes
 

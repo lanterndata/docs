@@ -2,7 +2,7 @@
 
 ## Lantern Cloud
 
-The easiest way to get started with all of our tools is with [Lantern Cloud](https://lantern.dev).
+The easiest way to get started with all of our tools is with [Lantern Cloud](/).
 
 We're currently in closed beta. Reach out at support@lantern.dev for access. We'd love to learn more about your use case and be helpful.
 

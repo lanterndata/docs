@@ -2,7 +2,7 @@
 
 With the Lantern CLI, you can create an HNSW index externally to Postgres, without consuming database resources, and import it.
 
-You can read more about the benchmarking and performance of Lantern Index in [this](https://lantern.dev/blog/hnsw-index-creation) blog post.
+You can read more about the benchmarking and performance of Lantern Index in [this](/blog/hnsw-index-creation) blog post.
 
 ## Prerequisites
 
