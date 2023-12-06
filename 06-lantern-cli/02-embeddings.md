@@ -39,6 +39,24 @@ clip/ViT-B-32-visual - type: visual, downloaded: true
 `downloaded`: if the model onnx file and tokenizer are already downloaded or not (it will be automatically downloaded on the first run)
 `type`: if visual you should provide either image url or image path as input to generate embeddings for the image data
 
+Below is the table with specifications for each model
+
+| Model Name                              | Dimensions | Max Tokens | Avg Speed in Cloud |
+| --------------------------------------- | ---------- | ---------- | ------------------ |
+| microsoft/all-MiniLM-L12-v2             | 384        | 128        | 550 emb/s          |
+| clip/ViT-B-32-textual                   | 512        | 77         | 500 emb/s          |
+| BAAI/bge-small-en                       | 384        | 512        | 380 emb/s          |
+| thenlper/gte-base                       | 768        | 128        | 250 emb/s          |
+| intfloat/e5-base-v2                     | 768        | 512        | 230 emb/s          |
+| microsoft/all-mpnet-base-v2             | 768        | 128        | 200 emb/s          |
+| transformers/multi-qa-mpnet-base-dot-v1 | 768        | 250        | 120 emb/s          |
+| BAAI/bge-base-en                        | 768        | 512        | 100 emb/s          |
+| thenlper/gte-large                      | 1024       | 128        | 100 emb/s          |
+| clip/ViT-B-32-visual                    | 512        | 224        | 50 emb/s           |
+| llmrails/ember-v1                       | 1024       | 512        | 45 emb/s           |
+| intfloat/e5-large-v2                    | 1024       | 512        | 40 emb/s           |
+| BAAI/bge-large-en                       | 1024       | 512        | 25 emb/s           |
+
 ## Set Up Data
 
 Note: You can skip this step if you already have data in your database
