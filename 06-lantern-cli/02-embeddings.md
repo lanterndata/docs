@@ -18,6 +18,9 @@ lantern-cli show-models
 
 You will see an output like this
 
+- `downloaded`: if the model onnx file and tokenizer are already downloaded or not (it will be automatically downloaded on the first run)
+- `type`: if visual you should provide either image url or image path as input to generate embeddings for the image data
+
 ```bash
 [*] [Lantern Embeddings] Available Models
 
@@ -35,9 +38,6 @@ thenlper/gte-large - type: textual, downloaded: true
 BAAI/bge-large-en - type: textual, downloaded: true
 clip/ViT-B-32-visual - type: visual, downloaded: true
 ```
-
-`downloaded`: if the model onnx file and tokenizer are already downloaded or not (it will be automatically downloaded on the first run)
-`type`: if visual you should provide either image url or image path as input to generate embeddings for the image data
 
 Below is the table with specifications for each model
 
