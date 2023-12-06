@@ -41,6 +41,7 @@ clip/ViT-B-32-visual - type: visual, downloaded: true
 
 Below is the table with specifications for each model
 
+```table
 | Model Name                              | Dimensions | Max Tokens | Avg Speed in Cloud |
 | --------------------------------------- | ---------- | ---------- | ------------------ |
 | microsoft/all-MiniLM-L12-v2             | 384        | 128        | 550 emb/s          |
@@ -56,6 +57,7 @@ Below is the table with specifications for each model
 | llmrails/ember-v1                       | 1024       | 512        | 45 emb/s           |
 | intfloat/e5-large-v2                    | 1024       | 512        | 40 emb/s           |
 | BAAI/bge-large-en                       | 1024       | 512        | 25 emb/s           |
+```
 
 ## Set Up Data
 
