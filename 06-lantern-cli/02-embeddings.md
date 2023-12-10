@@ -12,16 +12,19 @@ For one-off embedding generation, you can use [embedding generation inside Postg
 - [ONNX Runtime](/docs/lantern-cli/install)
 - Running Postgres database
 
-## Get Available Models
+## Available Models
+
+The following models are available in the latest version of the CLI
+
+CONTENT_VAR_MODELS
+
+To see the available models in the Lantern CLI, run
 
 ```bash
 lantern-cli show-models
 ```
 
 You will see an output like this
-
-- `downloaded`: if the model onnx file and tokenizer are already downloaded or not (it will be automatically downloaded on the first run)
-- `type`: if visual you should provide either image url or image path as input to generate embeddings for the image data
 
 ```bash
 [*] [Lantern Embeddings] Available Models
@@ -41,25 +44,9 @@ BAAI/bge-large-en - type: textual, downloaded: true
 clip/ViT-B-32-visual - type: visual, downloaded: true
 ```
 
-Below is the table with specifications for each model
+The model is `downloaded` if the model onnx file and tokenizer are already downloaded. If false, it will be automatically downloaded on the first run.
 
-```table
-| Model Name                              | Dimensions | Max Tokens | Avg Speed in Cloud |
-| --------------------------------------- | ---------- | ---------- | ------------------ |
-| microsoft/all-MiniLM-L12-v2             | 384        | 128        | 550 emb/s          |
-| clip/ViT-B-32-textual                   | 512        | 77         | 500 emb/s          |
-| BAAI/bge-small-en                       | 384        | 512        | 380 emb/s          |
-| thenlper/gte-base                       | 768        | 128        | 250 emb/s          |
-| intfloat/e5-base-v2                     | 768        | 512        | 230 emb/s          |
-| microsoft/all-mpnet-base-v2             | 768        | 128        | 200 emb/s          |
-| transformers/multi-qa-mpnet-base-dot-v1 | 768        | 250        | 120 emb/s          |
-| BAAI/bge-base-en                        | 768        | 512        | 100 emb/s          |
-| thenlper/gte-large                      | 1024       | 128        | 100 emb/s          |
-| clip/ViT-B-32-visual                    | 512        | 224        | 50 emb/s           |
-| llmrails/ember-v1                       | 1024       | 512        | 45 emb/s           |
-| intfloat/e5-large-v2                    | 1024       | 512        | 40 emb/s           |
-| BAAI/bge-large-en                       | 1024       | 512        | 25 emb/s           |
-```
+The `type` of the model can be either visual or textual. If text, the input should be a string. If visual, the input should be either an image url or local image path.
 
 ## Set Up Data
 

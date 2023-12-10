@@ -8,11 +8,15 @@
 - Model (e.g., `BAAI/bge-small-en`)
 - Embedding column to insert the data into (e.g., `book_summary_embedding`)
 
+As before, the following models are available for generating embeddings.
+
+CONTENT_VAR_MODELS
+
 ## Self-Hosting
 
-Use the Lantern CLI. Find installation steps [here](/docs/lantern-cli/install).
+Generating embedding columns requires the Lantern CLI. Installation steps are found [here](/docs/lantern-cli/install).
 
-You can generate embeddings in a [one-off job](/docs/lantern-cli/embeddings).
+Using the CLI, you can generate embeddings in a [one-off job](/docs/lantern-cli/embeddings).
 
 ```bash
 lantern-cli create-embeddings \
@@ -25,6 +29,6 @@ lantern-cli create-embeddings \
     --batch-size 100
 ```
 
-You can also use the [daemon](/docs/lantern-cli/daemon) to continuously generate embeddings for new columns.
+You can also use the Lantern CLI [daemon](/docs/lantern-cli/daemon) to continuously generate embeddings for new columns.
 
 The Lantern Cloud dashboard combines both of these processes in a seamless UI.
