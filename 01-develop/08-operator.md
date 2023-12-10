@@ -1,9 +1,19 @@
 # Single operator
 
-Lantern adds experimental support for a single operator `<?>`. It has the following benefits
+Lantern adds experimental support for a single operator `<?>`. The operator has the following benefits
 
 - One operator for all index queries
 - Automatically detect when the operator is being used without an index
+
+## Setup
+
+To enable the extension, set the runtime parameter `lantern.pgvector_compat` to `FALSE`. See below for an example, and see notes on [Postgres configuration](/docs/develop/postgres) for more details on how to set this parameter.
+
+```sql
+SET lantern.pgvector_compat = FALSE;
+```
+
+## Usage
 
 You can create an index using the steps documented [here](/docs/develop/index). Then, at query time, you can just use the operator `<?>` to perform nearest neighbor search queries. Lantern will automatically infer the distance metric to use.
 

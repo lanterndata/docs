@@ -31,13 +31,9 @@ EXPLAIN (COSTS FALSE) SELECT 1 FROM books ORDER BY v <-> '{1,0,0}' LIMIT 1;
 
 ### Postgres estimated that a table scan would be faster
 
-When determining how to perform a query, Postgres makes an estimate of various execution plans. Especially for small tables, it is possible that Postgres estimated that a sequential scan would be more efficient than an index scan. This estimate is not 100% accurate, and in general we expect index scans to perform faster than sequential scans, even for smaller tables. To avoid this, you can instruct Postgres to avoid sequential scans whenever possible with
+When determining how to perform a query, Postgres makes an estimate of various execution plans. Especially for small tables, it is possible that Postgres estimated that a sequential scan would be more efficient than an index scan. This estimate is not 100% accurate, and in general we expect index scans to perform faster than sequential scans, even for smaller tables.
 
-```sql
-SET enable_seqscan=FALSE;
-```
-
-For example, you can run
+To avoid this, you can instruct Postgres to avoid sequential scans whenever possible by setting the `enable_seqscan` parameter to `FALSE`. See below for an example, and see notes on [Postgres configuration](/docs/develop/postgres) for more details on how to set this parameter.
 
 ```sql
 SET enable_seqscan=FALSE;
