@@ -71,7 +71,14 @@ INSERT INTO articles (title) VALUES ('What is vector search'), ('Getting your AI
 ## Run Embedding Generation
 
 ```bash
-lantern-cli create-embeddings  --model 'microsoft/all-MiniLM-L12-v2'  --uri 'postgresql://[username]:[password]@localhost:5432/[db]' --table "articles" --column "title" --out-column "title_embedding" --pk id --batch-size 100
+lantern-cli create-embeddings \
+    --model 'microsoft/all-MiniLM-L12-v2'  \
+    --uri 'postgresql://[username]:[password]@localhost:5432/[db]' \
+    --table "articles" \
+    --column "title" \
+    --out-column "title_embedding" \
+    --pk id \
+    --batch-size 100
 ```
 
 ## Verify Results

@@ -28,38 +28,38 @@ Here is a non-comprehensive overview of what you can do with Lantern.
 Create a table with an embedding column
 
 ```sql
-CREATE TABLE books (id INTEGER PRIMARY KEY, text_embedding REAL[3]);
+CREATE TABLE books (id INTEGER PRIMARY KEY, book_embedding REAL[3]);
 ```
 
 Insert embeddings
 
 ```sql
-INSERT INTO books (text_embedding) VALUES ('{0,1,0}'), ('{3,2,4}');
+INSERT INTO books (book_embedding) VALUES ('{0,1,0}'), ('{3,2,4}');
 ```
 
 Calculate distance and select nearest rows without using an index
 
 ```sql
-SELECT l2sq_dist(text_embedding, '{0,0,0}') FROM books
-    ORDER BY l2sq_dist(text_embedding, '{0,0,0}') LIMIT 1;
+SELECT book_embedding <-> '{0,0,0}' FROM books
+    ORDER BY book_embedding <-> '{0,0,0}' LIMIT 1;
 ```
 
 Create an index
 
 ```sql
-CREATE INDEX book_index ON books USING hnsw(text_embedding dist_l2sq_ops)
+CREATE INDEX book_index ON books USING hnsw(book_embedding dist_l2sq_ops)
     WITH (M=2, ef_construction=10, ef=4, dims=3);
 ```
 
-Select nearest rows using an index
+Select nearest rows using the index
 
 ```sql
-SELECT l2sq_dist(text_embedding, '{0,0,0}') FROM books
-    ORDER BY text_embedding <-> '{0,0,0}' LIMIT 1;
+SELECT book_embedding <-> '{0,0,0}' FROM books
+    ORDER BY book_embedding <-> '{0,0,0}' LIMIT 1;
 ```
 
 Generate embeddings
 
 ```sql
-SELECT text_embedding('BAAI/bge-base-en', 'My text input');
+SELECT book_embedding('BAAI/bge-base-en', 'My text input');
 ```

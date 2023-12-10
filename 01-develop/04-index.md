@@ -9,7 +9,7 @@ CREATE INDEX ON [TABLE] USING hnsw ([column] [operator class])
     WITH (m=[int], ef_construction=[int], ef=[int]);
 ```
 
-For example, in the query below we create an index on our `books` table, over the `text_embedding` column which has dimension `3`, using the L2 squared distance operator class `dist_l2sq_ops`. We choose the HNSW parameters `M=2`, `ef_construction=4`, and `ef=4`.
+For example, in the query below we create an index on our `books` table, over the `book_embedding` column which has dimension `3`, using the L2 squared distance operator class `dist_l2sq_ops`. We choose the HNSW parameters `M=2`, `ef_construction=4`, and `ef=4`.
 
 ```sql
 CREATE INDEX
@@ -17,7 +17,7 @@ CREATE INDEX
 ON
     books
 USING
-    hnsw (text_embedding dist_l2sq_ops)
+    hnsw (book_embedding dist_l2sq_ops)
 WITH (
     M = 2,
     ef_construction = 10,
@@ -28,14 +28,14 @@ WITH (
 
 ## Operator classes
 
-The following operator classes are available for indexes. Note the corresponding distance functions described earlier.
+The following distance metrics are available for indexes, using the corresponding operator classes.
 
 ```table
-| Name         | Operator Class     | Distance Function      | Data Types         |
-|------------- | ------------------ | ------------- | ------------------ |
-|**Euclidean** | `dist_l2sq_ops`    |`l2sq_dist`    | `REAL[]`, `VECTOR` |
-|**Cosine**    | `dist_cos_ops`     |`cos_dist`     | `REAL[]`, `VECTOR` |
-|**Hamming**   | `dist_hamming_ops` |`hamming_dist` | `INTEGER[]`        |
+| Distance metric | Distance operator class     | Supported data types |
+|---------------- | --------------------------- | -------------------- |
+|**Euclidean**    | `dist_l2sq_ops`             | `REAL[]`, `VECTOR`   |
+|**Cosine**       | `dist_cos_ops`              | `REAL[]`, `VECTOR`   |
+|**Hamming**      | `dist_hamming_ops`          | `INTEGER[]`          |
 ```
 
 ## Index Parameters

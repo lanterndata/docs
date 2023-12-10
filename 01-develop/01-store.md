@@ -35,7 +35,7 @@ ALTER TABLE books ADD COLUMN reviews_embedding REAL[];
 Populate your table with embedding data.
 
 ```sql
-INSERT INTO books (id, title, author, published_at, text_embedding, reviews) VALUES
+INSERT INTO books (id, title, author, published_at, book_embedding, reviews) VALUES
     (1, 'The Lightning Thief', 'Rick Riordan', 1999, '{0,0,1}', NULL),
     (2, 'White Fang', 'Jack London', 2000, '{1,0,1}', 'Good');
 ```
@@ -45,17 +45,17 @@ INSERT INTO books (id, title, author, published_at, text_embedding, reviews) VAL
 Insert a new row or update the embedding of an existing row.
 
 ```sql
-INSERT INTO books (id, title, text_embedding) VALUES
+INSERT INTO books (id, title, book_embedding) VALUES
     (4, 'The Lord of the Rings', '{1,1,0}')
 ON CONFLICT (id)
-DO UPDATE SET text_embedding = EXCLUDED.text_embedding;
+DO UPDATE SET book_embedding = EXCLUDED.book_embedding;
 ```
 
 ### Update embeddings
 
 ```sql
-UPDATE books SET text_embedding = '{0,0,0}' WHERE id = 1;
-UPDATE books SET text_embedding = ARRAY[0,0,0] WHERE id = 2;
+UPDATE books SET book_embedding = '{0,0,0}' WHERE id = 1;
+UPDATE books SET book_embedding = ARRAY[0,0,0] WHERE id = 2;
 ```
 
 ### Delete embeddings
