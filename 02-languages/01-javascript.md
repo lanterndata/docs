@@ -91,10 +91,22 @@ const result = await db
   .limit(5);
 ```
 
+## Sequelize
+
+Insert embedding
+
+```javascript
+await Book.create({ book_embedding: embedding });
+```
+
+## Knex
+
+Insert embedding
+
+```javascript
+await knex("books").insert({ book_embedding: embedding });
+```
+
 ## Postgres.js
 
 ## Drizzle ORM
-
-## Sequelize
-
-## Knex
