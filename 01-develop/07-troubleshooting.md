@@ -92,6 +92,6 @@ SELECT v <-> ARRAY[0,0,0] AS distance FROM books ORDER BY CASE WHEN distance > 5
 SELECT v <-> ARRAY[0,0,0] AS distance FROM books ORDER BY (SELECT MAX(distance) FROM books);
 ```
 
-In the second group of examples, complexity is introduced by mathematical expressions, functions, and aliases that hinder the query planner's ability to recognize the correlation between the index and the distance calculation.
+In the second group of examples, complexity is introduced by mathematical expressions and functions that hinder the query planner's ability to recognize the correlation between the index and the distance calculation.
 
 If you are having this issue, try simplifying your query. Feel free to contact us at support@lantern.dev for additional help.
