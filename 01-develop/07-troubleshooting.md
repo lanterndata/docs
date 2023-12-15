@@ -65,14 +65,14 @@ SELECT v <-> ARRAY[0,0,0] FROM books ORDER BY 1;
 
 -- Orders by the first column (result of the distance calculation)
 SELECT v <-> ARRAY[0,0,0] AS distance FROM books ORDER BY 1;
+
+-- Orders by an alias of the distance calculation
+SELECT v <-> ARRAY[0,0,0] AS distance FROM books ORDER BY distance;
 ```
 
 Here are examples of SQL queries that will not use the index.
 
 ```sql
--- Orders by the alias instead of the actual distance calculation
-SELECT v <-> ARRAY[0,0,0] AS distance FROM books ORDER BY distance;
-
 -- Using an alias in ORDER BY with a mathematical expression
 SELECT v <-> ARRAY[0,0,0] AS distance FROM books ORDER BY distance * 2;
 
