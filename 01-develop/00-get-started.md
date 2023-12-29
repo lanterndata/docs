@@ -61,5 +61,5 @@ SELECT book_embedding <-> '{0,0,0}' FROM books
 Generate embeddings
 
 ```sql
-SELECT book_embedding('BAAI/bge-base-en', 'My text input');
+SELECT text_embedding('BAAI/bge-base-en', 'My text input');
 ```
