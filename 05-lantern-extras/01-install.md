@@ -25,9 +25,8 @@ make install
 
 ## Test
 
-<Note>
-The first run of each model will take longer as it will download the model file and tokenizer.
-</Note>
+Note: The first run of each model will take longer as it will download the model file and tokenizer.
+
 ```sql
 CREATE EXTENSION lantern_extras;
 SELECT get_available_models(); -- get available models
