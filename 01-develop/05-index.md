@@ -6,7 +6,7 @@ To create an index you can use the following syntax:
 
 ```sql
 CREATE INDEX ON [TABLE] USING hnsw ([column] [operator class])
-    WITH (m=[int], ef_construction=[int], ef=[int]);
+    WITH (M=[int], ef_construction=[int], ef=[int], dim=[int]);
 ```
 
 For example, in the query below we create an index on our `books` table, over the `book_embedding` column which has dimension `3`, using the L2 squared distance operator class `dist_l2sq_ops`. We choose the HNSW parameters `M=2`, `ef_construction=4`, and `ef=4`.
