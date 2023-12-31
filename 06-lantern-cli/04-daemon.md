@@ -1,6 +1,6 @@
 # Daemon
 
-With the Lantern CLI Daemon, you can continuously generate embeddings for your Postgres table data without affecting database performance.
+With the Lantern CLI Daemon, you can continuously generate embeddings, indexes and autotune jobs for your Postgres table data without affecting database performance.
 
 ## Prerequisites
 
@@ -12,35 +12,85 @@ With the Lantern CLI Daemon, you can continuously generate embeddings for your P
 
 ![Lantern Daemon Architecture](https://storage.googleapis.com/lantern-web/daemon-architecture.jpg)
 
-You should have `jobs` table in your database. The Daemon will read jobs from this table, and set up continuous listeners for the target database.
+You should have `jobs` table in your database for embeddings, external indexes and autotune. The Daemon will read jobs from these tables, and set up continuous listeners to the target database (only for embedding jobs).
 
 ```sql
-CREATE TABLE jobs (
-  id SERIAL PRIMARY KEY,
-  db_connection TEXT NOT NULL, -- target database connection url. Like postgresql://[username]:[password]@[host]:[port]/[dbname]
-  init_started_at TIMESTAMP, -- first time when job was started
-  init_failed_at TIMESTAMP, -- if the job is failed during the first run
-  init_finished_at TIMESTAMP, -- first run finish time
-  init_failure_reason TEXT, -- error message if job will be failed
-  canceled_at BOOL, -- if set to true all listeners will be closed for that job. This can be change while daemon is running
-  schema TEXT, -- target schema name in destination database (default is public)
-  table TEXT, -- target table name in destination database
-  src_column TEXT, -- name of the source column in target database table
-  dst_column TEXT, -- name of the destination column in target database table under which the embeddings will be generated
-  embedding_model TEXT, -- model name to use (you can get the models by running lantern-cli show-models)
-)
+CREATE TABLE "public"."embedding_generation_jobs" (
+    "id" SERIAL PRIMARY KEY,
+    "database_id" text NOT NULL,
+    "db_connection" text NOT NULL,
+    "schema" text NOT NULL,
+    "table" text NOT NULL,
+    "src_column" text NOT NULL,
+    "dst_column" text NOT NULL,
+    "embedding_model" text NOT NULL,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "canceled_at" timestamp,
+    "init_started_at" timestamp,
+    "init_finished_at" timestamp,
+    "init_failed_at" timestamp,
+    "init_failure_reason" text,
+    "init_progress" int2 DEFAULT 0
+);
+
+CREATE TABLE "public"."external_index_jobs" (
+    "id" SERIAL PRIMARY KEY,
+    "database_id" text NOT NULL,
+    "db_connection" text NOT NULL,
+    "schema" text NOT NULL,
+    "table" text NOT NULL,
+    "column" text NOT NULL,
+    "index" text,
+    "operator" text NOT NULL,
+    "efc" INT NOT NULL,
+    "ef" INT NOT NULL,
+    "m" INT NOT NULL,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "canceled_at" timestamp,
+    "started_at" timestamp,
+    "finished_at" timestamp,
+    "failed_at" timestamp,
+    "failure_reason" text,
+    "progress" INT2 DEFAULT 0
+);
+
+CREATE TABLE "public"."index_autotune_jobs" (
+    "id" SERIAL PRIMARY KEY,
+    "database_id" text NOT NULL,
+    "db_connection" text NOT NULL,
+    "schema" text NOT NULL,
+    "table" text NOT NULL,
+    "column" text NOT NULL,
+    "metric_kind" text NOT NULL,
+    "target_recall" int NOT NULL,
+    "k" int NOT NULL,
+    "create_index" bool NOT NULL,
+    "embedding_model" text NULL,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "canceled_at" timestamp,
+    "started_at" timestamp,
+    "finished_at" timestamp,
+    "failed_at" timestamp,
+    "failure_reason" text,
+    "progress" INT2 DEFAULT 0
+);
 ```
 
 After you have the `jobs` table set up you can run the daemon
 
 ```bash
-lantern-cli start-daemon --uri 'postgresql://[username]:[password]@[host]:[port]/[dbname]' --table jobs
+lantern-cli start-daemon --uri 'postgresql://[username]:[password]@[host]:[port]/[dbname]' --embedding-table embedding_generation_jobs --external-index-table external_index_jobs --autotune-table index_autotune_jobs
 ```
+
+Note: It is not required to have all the tables for different kind of jobs, for example you can run just embedding jobs and omit `--external-index-table` and `--autotune-table` arguments
 
 And insert a new job
 
 ```sql
-INSERT INTO jobs (db_connection, schema, "table", src_column, dst_column, embedding_model)
+INSERT INTO embedding_generation_jobs (db_connection, schema, "table", src_column, dst_column, embedding_model)
 VALUES
 ('postgres://postgres@localhost:5432/test', 'public', 'articles', 'title', 'title_embedding', 'microsoft/all-MiniLM-L12-v2');
 ```
