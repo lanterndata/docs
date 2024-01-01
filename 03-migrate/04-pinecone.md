@@ -1,4 +1,4 @@
-# Migrate from pinecone to Lantern Cloud
+# Migrate from Pinecone to Lantern Cloud
 
 This guide assumes that you are using Pinecone, and that you want to use Lantern Cloud instead.
 

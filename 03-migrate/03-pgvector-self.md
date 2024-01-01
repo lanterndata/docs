@@ -116,7 +116,7 @@ To completely remove `pgvector` from your database, there are a few approaches. 
    ALTER TABLE table_name ALTER COLUMN vector_column_name TYPE REAL[];
    ```
 
-5. Disable pgvector and enable Lantern
+5. Disable `pgvector` and enable Lantern
 
    Disable the `pgvector` extension, and enable the Lantern extension.
 
