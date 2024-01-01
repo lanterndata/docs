@@ -1,6 +1,6 @@
 # Create External index
 
-Lantern Extras enables creating external index right from the SQL without using `lantern-cli`
+The Lantern Extras Postgres extension enables creating an external index directly from SQL.
 
 ## Run Index Creation
 
@@ -20,13 +20,22 @@ lantern_create_external_index(
 );
 ```
 
+For example, the code below creates an external index `embeddings_v_idx` on the `v` column of the `embeddings` table.
+
 ```sql
+-- Create table and add some data
 CREATE TABLE embeddings (id SERIAL PRIMARY KEY, v REAL[]);
 INSERT INTO embeddings (v) VALUES ('{0,0,0}'), ('{0,1,0}'), ('{1,0,0}');
+
+-- Create external index
 SELECT lantern_create_external_index('v', 'embeddings');
 ```
 
-Then this index can be reindexed using the following function:
+## Reindexing
+
+In time, we may want to re-index an existing external index due to significant changes in the data distribution. This can be done in SQL using the function `lantern_reindex_external_index`, which accepts as input the index name.
+
+For example, to re-index the `embeddings_v_idx` index from above, run:
 
 ```sql
 SELECT lantern_reindex_external_index('embeddings_v_idx');
