@@ -1,4 +1,4 @@
-# Create Embedding Index
+# Create Index
 
 ## Create an index
 

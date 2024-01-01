@@ -1,6 +1,6 @@
 # Generate Embeddings
 
-With the Lantern CLI, you can populate an entire column with embeddings without affecting database performance. This is achieved by generating the embeddings outside of Postgres and importing them. This is useful for large-scale embedding population.
+With the Lantern CLI `create-embeddings` routine, you can populate an entire column with embeddings without affecting database performance. This is achieved by generating the embeddings outside of Postgres and importing them. This is useful for large-scale embedding population.
 
 The Lantern CLI also supports continuously populating an embedding column as new rows are inserted.
 
