@@ -1,10 +1,14 @@
 # Generate Embeddings
 
-Lantern Extras enables generating embeddings using SQL. The following embedding models are currently supported:
-
-CONTENT_VAR_MODELS
+The Lantern Extras Postgres extension enables generating embeddings using SQL with the functions `text_embedding` and `image_embedding`.
 
 Note that generating embeddings is a CPU-intensive task and large scale embedding generation processes. For large scale embedding generation, the Lantern CLI provides a [separate process](/docs/lantern-cli/embeddings).
+
+## Supported Models
+
+The following embedding models are currently supported:
+
+CONTENT_VAR_MODELS
 
 ## Run Embedding Generation
 

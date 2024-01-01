@@ -1,6 +1,6 @@
 # Daemon
 
-With the Lantern CLI Daemon, you can continuously generate embeddings, indexes and autotune jobs for your Postgres table data without affecting database performance.
+With the Lantern CLI's `start-daemon` routine, you can continuously generate embeddings, indexes and autotune jobs for your Postgres table data without affecting database performance.
 
 ## Prerequisites
 

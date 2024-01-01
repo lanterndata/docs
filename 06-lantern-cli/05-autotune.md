@@ -1,6 +1,6 @@
 # Autotune Index
 
-With the Lantern CLI, you can autotune an HNSW and find the index parameters which can give you the best recall and latency.
+With the Lantern CLI's `autotune-index` routine, you can autotune an HNSW and find the index parameters which can give you the best recall and latency.
 
 ## Prerequisites
 
@@ -13,9 +13,9 @@ With the Lantern CLI, you can autotune an HNSW and find the index parameters whi
 lantern-cli autotune-index --uri 'postgresql://[username]:[password]@localhost:5432/[db]' --table "sift1m" --column "v" --metric-kind l2sq --pk id --recall 99 -k 30 --create-index
 ```
 
-After this you should see an output like this:
+After this you should see output like this:
 
-```
+```bash
 [*] [Lantern Index Autotune] ========== Results for job 05a53289-7a80-4843-9ef7-bee951dbc13c ==========
 [*] [Lantern Index Autotune] result(recall=96%, latency=7ms, indexing_duration=2s) index_params(m=6, ef=64, ef_construction=32)
 [*] [Lantern Index Autotune] result(recall=98.5%, latency=7ms, indexing_duration=3s) index_params(m=8, ef=64, ef_construction=40)

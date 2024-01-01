@@ -1,15 +1,15 @@
 # Create Index
 
-With the Lantern CLI, you can create an HNSW index externally to Postgres, without consuming database resources, and import it.
+With the Lantern CLI's `create-index` routine, you can create an HNSW index externally to Postgres, without consuming database resources, and import it.
 
-You can read more about the benchmarking and performance of Lantern Index in [this](/blog/hnsw-index-creation) blog post.
+You can read more about how we were able to improve index creation times by 90x over `pgvector` in [this](/blog/hnsw-index-creation) blog post.
 
 ## Prerequisites
 
 - [Lantern CLI](/docs/lantern-cli/install)
 - Postgres database with the [Lantern extension](/docs/lantern-db/install) installed
 
-## Set Up Data
+### Set Up Data
 
 Note: You can skip this step if you already have vector data in your database
 
@@ -21,10 +21,19 @@ INSERT INTO embeddings (v) VALUES ('{0,0,0}'), ('{0,1,0}'), ('{1,0,0}');
 ## Run Index Creation
 
 ```bash
-lantern-cli create-index --uri 'postgresql://[username]:[password]@localhost:5432/[db]' --table "embeddings" --column "v" -m 10 --efc 128 --ef 64 --metric-kind l2sq --out /tmp/index.usearch --import
+lantern-cli create-index \
+    --uri 'postgresql://[username]:[password]@localhost:5432/[db]' \
+    --table "embeddings" \
+    --column "v" \
+    -m 10 \
+    --efc 128 \
+    --ef 64 \
+    --metric-kind l2sq \
+    --out /tmp/index.usearch \
+    --import
 ```
 
-After this the index will be created and imported to your database, even if the databas is on remote server!
+After this the index will be created and imported to your database, even if the database is on remote server!
 
 **Make sure to provide database uri with superuser**
 
