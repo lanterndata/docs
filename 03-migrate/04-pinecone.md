@@ -10,8 +10,7 @@ This guide assumes that you are using Pinecone, and that you want to use Lantern
 
 2. Install lantern-pinecone client
 
-   The most straightforward way to migrate from Pinecone to Lantern Cloud is using [`lantern-pinecone`](https://github.com/lanterndata/lantern-python/blob/main/lantern_pinecone/README.md) client.
-   Even if you don't want to use the Python client you can migrate the data and then use your Postgres instance with other clients.
+   The most straightforward way to migrate from Pinecone to Lantern Cloud is by using the [`lantern-pinecone`](https://github.com/lanterndata/lantern-python/blob/main/lantern_pinecone/README.md) Python client. Even if you don't want to use `lantern-pinecone` as your primary data client, you can use it to migrate the data and then interact with your data using another data client.
 
    ```bash
    pip install lantern-pinecone
@@ -28,9 +27,9 @@ This guide assumes that you are using Pinecone, and that you want to use Lantern
    lantern_pinecone.init(LANTERN_DATABASE_URL)
    ```
 
-   As currently there is a limitation on Pinecone and you can not export all the data or ids of your embeddings, we assume that you have your ids stored externally somewhere and you can provide list of `ids` to client.
+   Currently Pinecone does not allow you to export all the data or IDs of your embeddings [[1]](https://support.pinecone.io/hc/en-us/articles/12438275491741-How-do-I-export-my-Pinecone-index-) [[2]](https://community.pinecone.io/t/how-to-retrieve-list-of-ids-in-an-index/380). We assume that you have your IDs stored and can provide a list of `ids` to the client.
 
-   For this example we will assume that the Pinecone has vectors with sequential ids from 0 to 100000
+   In the example below, we assume that the Pinecone has vectors with sequential ids from 0 to 100000.
 
    ```python
    pinecone_ids = list(map(lambda x: str(x), range(100000)))
@@ -47,15 +46,15 @@ This guide assumes that you are using Pinecone, and that you want to use Lantern
    )
    ```
 
-4. Finishing steps
+4. Final steps
 
-After this step the data will be copied to your database under table with the same name as your `<pinecone_index_name>` with `HNSW` index on `embedding` column and `GIN` index on `metadata` column
+   After this step the data will be copied to your database under a table with the same name as your `<pinecone_index_name>` with `HNSW` index on `embedding` column and `GIN` index on the `metadata` column
 
-You can view index stats using
+   You can view index stats using
 
-```python
-index.describe_index_stats()
-```
+   ```python
+   index.describe_index_stats()
+   ```
 
 ## Support
 
