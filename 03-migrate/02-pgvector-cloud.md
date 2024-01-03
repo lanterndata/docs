@@ -8,7 +8,7 @@ This guide assumes that you are using Postgres with `pgvector`, and that you wan
 
    Sign up for [Lantern Cloud](/) and create a database. Obtain a database URL. We'll call this `LANTERN_DATABASE_URL`.
 
-2. Save pgvector indexes
+2. Save `pgvector` indexes
 
    To get the commands that were used to generate the `pgvector` indexes, run the following query
 
