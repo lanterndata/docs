@@ -28,6 +28,33 @@ cur.execute(
 )
 ```
 
+## psycopg3
+
+Enable the extension
+
+```python
+conn.execute('CREATE EXTENSION IF NOT EXISTS lantern')
+```
+
+Create a table
+
+```python
+conn.execute('CREATE TABLE items (id bigserial PRIMARY KEY, embedding REAL[3])')
+```
+
+Insert a vector
+
+```python
+embedding = [1, 2, 3]
+conn.execute('INSERT INTO items (embedding) VALUES (%s)', (embedding,))
+```
+
+Get the nearest neighbors to a vector
+
+```python
+conn.execute('SELECT * FROM items ORDER BY embedding <-> %s LIMIT 5', (embedding,)).fetchall()
+```
+
 ## asyncpg
 
 Insert a vector
