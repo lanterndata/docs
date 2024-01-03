@@ -8,7 +8,7 @@ This guide assumes that you are using Pinecone, and that you want to use Lantern
 
    Sign up for [Lantern Cloud](/) and create a database. Obtain a database URL. We'll call this `LANTERN_DATABASE_URL`.
 
-2. Install lantern-pinecone client
+2. Install the `lantern-pinecone` client
 
    The most straightforward way to migrate from Pinecone to Lantern Cloud is by using the [`lantern-pinecone`](https://github.com/lanterndata/lantern-python/blob/main/lantern_pinecone/README.md) Python client. Even if you don't want to use `lantern-pinecone` as your primary data client, you can use it to migrate the data and then interact with your data using another data client.
 
@@ -27,7 +27,7 @@ This guide assumes that you are using Pinecone, and that you want to use Lantern
    lantern_pinecone.init(LANTERN_DATABASE_URL)
    ```
 
-   Currently Pinecone does not allow you to export all the data or IDs of your embeddings [[1]](https://support.pinecone.io/hc/en-us/articles/12438275491741-How-do-I-export-my-Pinecone-index-) [[2]](https://community.pinecone.io/t/how-to-retrieve-list-of-ids-in-an-index/380). We assume that you have your IDs stored and can provide a list of `ids` to the client.
+   [Currently]((https://support.pinecone.io/hc/en-us/articles/12438275491741-How-do-I-export-my-Pinecone-index-)) Pinecone does not allow you to export all the data or IDs of your embeddings. We assume that you have your IDs stored and can provide a list of IDs to the client via the `pinecone_ids` field below.
 
    In the example below, we assume that the Pinecone has vectors with sequential ids from 0 to 100000.
 
@@ -46,6 +46,8 @@ This guide assumes that you are using Pinecone, and that you want to use Lantern
    )
    ```
 
+   If you do not have your IDs saved, you can leave `pinecone_ids` blank, and we will automatically retrieve your Pinecone IDs using the known [workaround](https://community.pinecone.io/t/how-to-retrieve-list-of-ids-in-an-index/380).
+
 4. Final steps
 
    After this step the data will be copied to your database under a table with the same name as your `<pinecone_index_name>` with `HNSW` index on `embedding` column and `GIN` index on the `metadata` column
@@ -57,5 +59,7 @@ This guide assumes that you are using Pinecone, and that you want to use Lantern
    ```
 
 ## Support
+
+To read more about the `lantern-pinecone` client, check out the [Github repo](https://github.com/lanterndata/lantern-python/tree/main/lantern_pinecone).
 
 Reach out to support@lantern.dev for any questions or assistance with migrations. We're happy to help.
