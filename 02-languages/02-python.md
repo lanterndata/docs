@@ -10,6 +10,13 @@ query = "My text input"
 
 ## psycopg2
 
+Install `psycopg2`
+
+```bash
+pip install psycopg2-binary
+```
+
+Connect to database and store / query vectors
 
 ```python
 import psycopg2
@@ -32,6 +39,14 @@ conn.close()
 
 ## asyncpg
 
+Install `asyncpg`
+
+```bash
+pip install asyncpg
+```
+
+Connect to database and store / query vectors
+
 ```python
 import asyncpg
 
@@ -49,14 +64,6 @@ await conn.fetch(f"SELECT * FROM books ORDER BY book_embedding <-> text_embeddin
 await conn.close()
 ```
 
-## [Python Client](https://github.com/lanterndata/lantern-python/tree/main/lantern)
+## [Lantern Python Client](https://github.com/lanterndata/lantern-python/tree/main/lantern)
 
-```python
-import lantern
-```
-
-## [Pinecone Client](https://github.com/lanterndata/lantern-python/tree/main/lantern_pinecone)
-
-```python
-import lantern_pinecone
-```
+## [Lantern Pinecone Client](https://github.com/lanterndata/lantern-python/tree/main/lantern_pinecone)
