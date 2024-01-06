@@ -64,6 +64,10 @@ await conn.fetch(f"SELECT * FROM books ORDER BY book_embedding <-> text_embeddin
 await conn.close()
 ```
 
-## [Lantern Python Client](https://github.com/lanterndata/lantern-python/tree/main/lantern)
+## Lantern Python Client
 
-## [Lantern Pinecone Client](https://github.com/lanterndata/lantern-python/tree/main/lantern_pinecone)
+See the [Github repo](https://github.com/lanterndata/lantern-python/tree/main/lantern) for documentation and examples.
+
+## Lantern Pinecone Client
+
+See the [Github repo](https://github.com/lanterndata/lantern-python/tree/main/lantern_pinecone) for documentation and examples.
