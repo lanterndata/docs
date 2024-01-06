@@ -42,7 +42,7 @@ This guide assumes that you are using Pinecone, and that you want to use Lantern
    )
    ```
 
-   See the [documentation](/docs/develop/python#pinecone-client) for more details on the `lantern-pinecone` client.
+   See the [documentation](https://github.com/lanterndata/lantern-python/blob/main/lantern_pinecone) for more details on the `lantern-pinecone` client.
 
 4. Final steps
 
