@@ -1,4 +1,4 @@
-# Populate an embedding column
+# Populate an Embedding Column
 
 ## Lantern Cloud
 

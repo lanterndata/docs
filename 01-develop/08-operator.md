@@ -1,4 +1,4 @@
-# Single operator
+# Single Operator
 
 Lantern adds experimental support for a single operator `<?>`. The operator has the following benefits
 
