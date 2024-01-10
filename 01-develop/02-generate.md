@@ -1,4 +1,4 @@
-# Generate Embeddings
+# Generate an Embedding
 
 Lantern supports generating embeddings inside the database for one-off transactions. Note that generating embeddings is a CPU-intensive task and large scale embedding generation processes. Lantern provides a [separate process](/docs/develop/generate) for large scale embedding generation.
 
