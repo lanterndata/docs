@@ -4,12 +4,6 @@ The Lantern Extras Postgres extension enables generating embeddings using SQL wi
 
 Note that generating embeddings is a CPU-intensive task and large scale embedding generation processes. For large scale embedding generation, the Lantern CLI provides a [separate process](/docs/lantern-cli/embeddings).
 
-## Supported Models
-
-The following embedding models are currently supported:
-
-CONTENT_VAR_MODELS
-
 ## Run Embedding Generation
 
 To generate one-off text embeddings, use the `text_embedding` function. For example, to generate an embedding for the text `My text input` using the embedding model `BAAI/bge-small-en`, run
@@ -23,3 +17,9 @@ To generate image embeddings, use the `image_embedding` function. For example, t
 ```sql
 SELECT image_embedding('clip/ViT-B-32-visual', 'https://lantern.dev/images/home/footer.png');
 ```
+
+## Supported Models
+
+The following embedding models are currently supported:
+
+CONTENT_VAR_MODELS

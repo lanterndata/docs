@@ -2,10 +2,6 @@
 
 Lantern supports generating embeddings inside the database for one-off transactions. Note that generating embeddings is a CPU-intensive task and large scale embedding generation processes. Lantern provides a [separate process](/docs/develop/generate) for large scale embedding generation.
 
-The following embedding models are supported
-
-CONTENT_VAR_MODELS
-
 ## Lantern Cloud
 
 [Lantern Cloud](/) supports one-off embedding generation out of the box.
@@ -21,6 +17,10 @@ To generate image embeddings, use the `image_embedding` function. For example, t
 ```sql
 SELECT image_embedding('clip/ViT-B-32-visual', 'https://lantern.dev/images/home/footer.png');
 ```
+
+The following embedding models are supported
+
+CONTENT_VAR_MODELS
 
 ## Self-Hosting
 
