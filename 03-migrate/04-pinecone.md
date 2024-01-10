@@ -8,7 +8,7 @@ This guide assumes that you are using Pinecone, and that you want to use Lantern
 
    Sign up for [Lantern Cloud](/) and create a database. Obtain a database URL. We'll call this `LANTERN_DATABASE_URL`.
 
-2. Install lantern-pinecone client
+2. Install the `lantern-pinecone` client
 
    The most straightforward way to migrate from Pinecone to Lantern Cloud is by using the [`lantern-pinecone`](https://github.com/lanterndata/lantern-python/blob/main/lantern_pinecone/README.md) Python client. Even if you don't want to use `lantern-pinecone` as your primary data client, you can use it to migrate the data and then interact with your data using another data client.
 
@@ -55,5 +55,7 @@ This guide assumes that you are using Pinecone, and that you want to use Lantern
    ```
 
 ## Support
+
+To read more about the `lantern-pinecone` client, check out the [Github repo](https://github.com/lanterndata/lantern-python/tree/main/lantern_pinecone).
 
 Reach out to support@lantern.dev for any questions or assistance with migrations. We're happy to help.
