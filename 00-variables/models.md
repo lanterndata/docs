@@ -14,4 +14,6 @@
 | `llmrails/ember-v1`                       | 1024       | 512        | Text       |
 | `intfloat/e5-large-v2`                    | 1024       | 512        | Text       |
 | `BAAI/bge-large-en`                       | 1024       | 512        | Text       |
+| `jinaai/jina-embeddings-v2-small-en`      | 512        | 8192       | Text       |
+| `jinaai/jina-embeddings-v2-base-en`       | 768        | 8192       | Text       |
 ```
