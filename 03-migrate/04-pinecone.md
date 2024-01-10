@@ -18,35 +18,31 @@ This guide assumes that you are using Pinecone, and that you want to use Lantern
 
 3. Initialize client and migrate
 
-   Next, we will initialize the Lantern client
+   Next, we will initialize the Lantern client.
 
    ```python
    import lantern_pinecone
-   from getpass import getpass
 
+   LANTERN_DATABASE_URL = "<your_lantern_database_url>"
    lantern_pinecone.init(LANTERN_DATABASE_URL)
    ```
 
-   [Currently]((https://support.pinecone.io/hc/en-us/articles/12438275491741-How-do-I-export-my-Pinecone-index-)) Pinecone does not allow you to export all the data or IDs of your embeddings. We assume that you have your IDs stored and can provide a list of IDs to the client via the `pinecone_ids` field below.
+   For optimal performance, provide a list of `pinecone_ids` to the client. Otherwise, the client will use a workaround to query the Pinecone API to retrieve the IDs. For more details, see [[1]](https://support.pinecone.io/hc/en-us/articles/12438275491741-How-do-I-export-my-Pinecone-index-) [[2]](https://community.pinecone.io/t/how-to-retrieve-list-of-ids-in-an-index/380).
 
-   In the example below, we assume that the Pinecone has vectors with sequential ids from 0 to 100000.
+   In the example below, we assume that the Pinecone has vectors with sequential ids from 0 to 1000.
 
    ```python
-   pinecone_ids = list(map(lambda x: str(x), range(100000)))
+   pinecone_ids = list(map(lambda x: str(x), range(1000)))
+
    index = lantern_pinecone.create_from_pinecone(
         api_key=<your_pinecone_api_key>,
         environment=<your_pinecone_environment>,
         index_name=<pinecone_index_name>,
-        namespace="",
         pinecone_ids=pinecone_ids,
-        m=16,
-        ef=128,
-        ef_construction=96,
-        recreate=True
    )
    ```
 
-   If you do not have your IDs saved, you can leave `pinecone_ids` blank, and we will automatically retrieve your Pinecone IDs using the known [workaround](https://community.pinecone.io/t/how-to-retrieve-list-of-ids-in-an-index/380).
+   See the [documentation](https://github.com/lanterndata/lantern-python/blob/main/lantern_pinecone) for more details on the `lantern-pinecone` client.
 
 4. Final steps
 
