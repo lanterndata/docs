@@ -1,5 +1,18 @@
 # Troubleshooting
 
+## Check if the index exists
+
+You can check if the index exists by querying the `pg_indexes` table.
+
+For example, if you created an index on the `books` table, you might expect to see an entry in the `pg_indexes` table similar to below
+
+```sql
+SELECT indexdef FROM pg_indexes WHERE indexdef LIKE '%USING hnsw%';
+                                                    indexdef
+---------------------------------------------------------------------------------------------------------------------------------
+CREATE INDEX books_embedding_idx ON public.books hnsw (embedding dist_cos_ops) WITH (ef_construction='128', ef='64', m='10', dim='1024')
+```
+
 ## Check if you are using the index
 
 You can use `EXPLAIN` to validate if you are using the index.
