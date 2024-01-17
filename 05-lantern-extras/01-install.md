@@ -16,8 +16,8 @@ Use our releases from GitHub. You can find available versions on the [releases](
 
 ```bash
 cd /tmp
-VERSION=0.0.3
-wget "https://github.com/lanterndata/lantern_extras/releases/download/v${VERSION}/lantern-extras-${VERSION}.tar"
+VERSION=0.0.11
+wget "https://github.com/lanterndata/lantern_extras/releases/download/${VERSION}/lantern-extras-${VERSION}.tar"
 tar xf "lantern-extras-${VERSION}.tar"
 cd "lantern-extras-${VERSION}"
 make install
