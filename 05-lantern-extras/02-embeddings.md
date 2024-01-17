@@ -18,6 +18,18 @@ To generate image embeddings, use the `image_embedding` function. For example, t
 SELECT image_embedding('clip/ViT-B-32-visual', 'https://lantern.dev/images/home/footer.png');
 ```
 
+The above mentioned functions will use local models using `ort` runtime.
+
+If you want to generate embeddings using OpenAI or Cohere APIs you can use the following functions:
+
+```sql
+SET lantern_extras.openai_token='xxxxxxxxxxxxx';
+SELECT openai_embedding('openai/text-embedding-ada-002', 'My text input');
+
+SET lantern_extras.cohere_token='xxxxxxxxxxxxx';
+SELECT cohere_embedding('cohere/embed-multilingual-v3.0 ', 'My text input');
+```
+
 ## Supported Models
 
 The following embedding models are currently supported:
