@@ -78,7 +78,7 @@ SELECT text_embedding('BAAI/bge-small-en', 'Hello world!');
 
 4. Install ONNX Runtime
 
-   Refer to [Installing ONNX Runtime guide](/docs/lantern-cli/install-onnx-runtime)
+   Refer to [Installing ONNX Runtime guide](/docs/lantern-cli/install#install-onnx-runtime)
 
    Note: You should add the onnx library path to `ld.conf`, as environment variables may not be accessible from Postgres Server
 
