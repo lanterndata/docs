@@ -4,13 +4,15 @@ This guide assumes that you are currently using Postgres without `pgvector`. If 
 
 ## Steps (bash)
 
+We'll use the `pg_dump` and `psql` utilities to migrate the data. These utilities are available on Linux, Mac, and Windows by downloading [Postgres](https://www.postgresql.org/download/).
+
 1. Create a Lantern Cloud database
 
    Sign up for [Lantern Cloud](/) and create a database. Obtain a database URL. We'll call this `LANTERN_DATABASE_URL`.
 
 2. Backup the old database using `pg_dump`
 
-   Use the `pgdump` utility to create a database backup. We assume below that your old database URL is stored in the environment variable `OLD_DATABASE_URL`.
+   Use the `pg_dump` utility to create a database backup. We assume below that your old database URL is stored in the environment variable `OLD_DATABASE_URL`.
 
    ```bash
    pg_dump $OLD_DATABASE_URL > backup.sql
