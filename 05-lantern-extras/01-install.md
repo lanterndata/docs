@@ -10,7 +10,7 @@
 
 - Linux (x86_64)
 
-### Installation
+### Install
 
 Use our releases from GitHub. You can find available versions on the [releases](https://github.com/lanterndata/lantern/releases) page.
 
@@ -23,7 +23,7 @@ cd "lantern-extras-${VERSION}"
 make install
 ```
 
-## Test
+### Test
 
 Note: The first run of each model will take longer as it will download the model file and tokenizer.
 
