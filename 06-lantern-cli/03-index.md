@@ -30,10 +30,12 @@ lantern-cli create-index \
     --ef 64 \
     --metric-kind l2sq \
     --out /tmp/index.usearch \
+    --remote-database
     --import
 ```
 
 After this the index will be created and imported to your database, even if the database is on remote server!
+If you are on the same server that your database is located you can omit `--remote-database` option, so it will use the local file from `--out` option.
 
 **Make sure to provide database uri with superuser**
 
@@ -64,10 +66,11 @@ Options:
   -m <M>                           Number of neighbours for each vector [default: 16]
       --efc <EFC>                  The size of the dynamic list for the nearest neighbors in construction [default: 128]
       --ef <EF>                    The size of the dynamic list for the nearest neighbors in search [default: 64]
-  -d <DIMS>                        Dimensions of vector
+  -d <DIMS>                        Dimensions of vector [default: 0]
       --metric-kind <METRIC_KIND>  Distance algorithm [default: l2sq] [possible values: l2sq, cos, hamming]
   -o, --out <OUT>                  Index output file [default: index.usearch]
   -i, --import                     Import index to database (should be run as db superuser to have access)
+  -r, --remote-database            If database is not on the same server where the job is running
       --index-name <INDEX_NAME>    Index name to use when imporrting index to database
   -h, --help                       Print help
 ```

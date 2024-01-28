@@ -21,6 +21,8 @@ CREATE TABLE "public"."embedding_generation_jobs" (
     "db_connection" text NOT NULL,
     "schema" text NOT NULL,
     "table" text NOT NULL,
+    "runtime" text NOT NULL,
+    "runtime_params" jsonb,
     "src_column" text NOT NULL,
     "dst_column" text NOT NULL,
     "embedding_model" text NOT NULL,
@@ -90,9 +92,9 @@ Note: It is not required to have all the tables for different kind of jobs, for 
 And insert a new job
 
 ```sql
-INSERT INTO embedding_generation_jobs (db_connection, schema, "table", src_column, dst_column, embedding_model)
+INSERT INTO embedding_generation_jobs (db_connection, schema, "table", src_column, dst_column, embedding_model, runtime)
 VALUES
-('postgres://postgres@localhost:5432/test', 'public', 'articles', 'title', 'title_embedding', 'microsoft/all-MiniLM-L12-v2');
+('postgres://postgres@localhost:5432/test', 'public', 'articles', 'title', 'title_embedding', 'microsoft/all-MiniLM-L12-v2', 'ort');
 ```
 
 The Daemon will pick up the job as soon as it appears on the table.
