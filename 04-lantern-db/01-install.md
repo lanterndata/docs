@@ -57,9 +57,8 @@ brew install lantern && lantern_install
 
 ### Prerequisites
 
-- cmake (>=3.3)
-- gcc
-- g++ (>=11)
+- cmake version: >=3.3
+- gcc && g++ version: >=11 when building portable binaries, >= 12 when building on new hardware or with CPU-specific vectorization
 - PostgreSQL 11, 12, 13, 14, 15 or 16
 - Corresponding development package for PostgreSQL (postgresql-server-dev-$version)
 

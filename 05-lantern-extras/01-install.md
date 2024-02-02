@@ -40,11 +40,10 @@ SELECT text_embedding('BAAI/bge-small-en', 'Hello world!');
 
 ### Prerequisites
 
-- cmake (>=3.3)
-- gcc
-- g++ (>=11)
+- cmake version: >=3.3
+- gcc && g++ version: >=11
+- Rust version: >= 1.70.0
 - PostgreSQL 11, 12, 13, 14, 15 or 16
-- Rust >= 1.70.0
 - Corresponding development package for PostgreSQL (postgresql-server-dev-$version)
 
 ### Supported platforms
