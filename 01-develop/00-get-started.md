@@ -28,7 +28,7 @@ Here is a non-comprehensive overview of what you can do with Lantern.
 Create a table with an embedding column
 
 ```sql
-CREATE TABLE books (id INTEGER PRIMARY KEY, book_embedding REAL[3]);
+CREATE TABLE books (id SERIAL PRIMARY KEY, book_embedding REAL[3]);
 ```
 
 Insert embeddings
@@ -48,7 +48,7 @@ Create an index
 
 ```sql
 CREATE INDEX book_index ON books USING hnsw(book_embedding dist_l2sq_ops)
-    WITH (M=2, ef_construction=10, ef=4, dims=3);
+    WITH (M=2, ef_construction=10, ef=4, dim=3);
 ```
 
 Select nearest rows using the index
