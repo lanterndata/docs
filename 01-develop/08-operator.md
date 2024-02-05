@@ -15,7 +15,7 @@ SET lantern.pgvector_compat = FALSE;
 
 ## Usage
 
-You can create an index using the steps documented [here](/docs/develop/index). Then, at query time, you can just use the operator `<?>` to perform nearest neighbor search queries. Lantern will automatically infer the distance metric to use.
+You can create an index using the steps documented [here](/docs/develop/indexing). Then, at query time, you can just use the operator `<?>` to perform nearest neighbor search queries. Lantern will automatically infer the distance metric to use.
 
 For example, you can create the following index.
 
