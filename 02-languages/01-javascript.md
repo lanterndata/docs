@@ -1,4 +1,4 @@
-# Javascript, Typescript
+# Javascript
 
 In the subsequent examples, assume the following variables are defined
 

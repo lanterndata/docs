@@ -4,7 +4,7 @@
 
 The easiest way to get started with all of our tools is with [Lantern Cloud](/).
 
-We're currently in closed beta. Reach out at support@lantern.dev for access. We'd love to learn more about your use case and be helpful.
+We're currently in closed beta. Reach out at support@lantern.dev for access. We'd love to learn more about your use case and help out.
 
 In Lantern cloud, you can create create a Lantern database with just a few clicks. Then, once you load your data into Lantern,
 you can [generate embeddings](/docs/develop/generate) with a single click from dozens of provided open source or proprietary embedding models.
@@ -14,20 +14,15 @@ You can then create a vector index from your dashboard or run an index-tuning ex
 
 Alternatively, you can also use our tools locally or self-host them. There are three tools that are provided out-of-the-box with Lantern Cloud.
 
-- For [Lantern](/docs/lantern-db/install), our core Postgres extension, we provide a Docker image, as well as instructions to install from binaries, from Homebrew, or from source.
-- For [Lantern Extras](/docs/lantern-extras/install), which further extends Postgres to support embedding generation, we provide instructions to install from binaries or from source.
-- For the [Lantern CLI](/docs/lantern-cli/install), which provides routines for generating embeddings and indexes, we provide a Docker image, as well as instructions to install using Cargo or from binaries.
+- [Lantern](/docs/lantern-db/install), our core Postgres extension, provides vector search in Postgres.
+- [Lantern Extras](/docs/lantern-extras/install), which further extends Postgres to support embedding generation.
+- [Lantern CLI](/docs/lantern-cli/install) provides routines for generating embeddings and indexes.
 
-If you are not on Lantern Cloud, make sure you enable the extensions after following the installation steps for [Lantern](/docs/lantern-db/install) and [Lantern Extras](/docs/lantern-extras/install).
-
-```sql
-CREATE EXTENSION IF NOT EXISTS lantern;
-CREATE EXTENSION IF NOT EXISTS lantern_extras;
-```
+You can install the tools individually by following the instructions linked.
 
 ## Overview
 
-Here is a non-comprehensive overview of what you can do with Lantern.
+Here is a non-comprehensive overview of what you can do with Lantern. The examples below use SQL, but we also provide client libraries for [Python](/docs/languages/python) and [JavaScript](/docs/languages/javascript).
 
 Create a table with an embedding column
 

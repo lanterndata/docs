@@ -1,5 +1,17 @@
 # Installation
 
+Lantern Extras is a Postgres extension that enables embedding generation inside Postgres. It is available as a Docker image, a Homebrew package, a binary, or from source.
+
+## Run with Docker
+
+We provide the [Lantern Suite](https://hub.docker.com/r/lanterndata/lantern-suite/tags) Docker image, which includes both Lantern and Lantern Extras. This enables both vector search and vector generation inside Postgres.
+
+```bash
+docker run -p 5432:5432 --name lantern-demo -e 'POSTGRES_PASSWORD=postgres' -d lanterndata/lantern-suite:latest-pg15
+```
+
+Note: The image is based on the [official Postgres docker image](https://hub.docker.com/%5F/postgres). Please refer to the Postgres image documentation for a full list of supported features and flags.
+
 ## Install From Binaries
 
 ### Prerequisites
@@ -12,28 +24,17 @@
 
 ### Install
 
-Use our releases from GitHub. You can find available versions on the [releases](https://github.com/lanterndata/lantern/releases) page.
+Use our releases from GitHub. You can find available versions on the [releases](https://github.com/lanterndata/lantern_extras/releases) page.
+
+Note: You can replace `VERSION` with the version you want to install
 
 ```bash
 cd /tmp
-VERSION=0.0.11
+VERSION=0.1.0
 wget "https://github.com/lanterndata/lantern_extras/releases/download/${VERSION}/lantern-extras-${VERSION}.tar"
 tar xf "lantern-extras-${VERSION}.tar"
 cd "lantern-extras-${VERSION}"
 make install
-```
-
-### Test
-
-Note: The first run of each model will take longer as it will download the model file and tokenizer.
-
-```sql
-CREATE EXTENSION lantern_extras;
-SELECT get_available_models(); -- get available models
-SELECT clip_text('Hello world!'); -- generate embeddings using openai clip model (textual)
-SELECT clip_image('https://storage.googleapis.com/lanterndata/images/icon100x100.png'); -- generate embeddings using openai clip model (visual)
--- using any model from the list
-SELECT text_embedding('BAAI/bge-small-en', 'Hello world!');
 ```
 
 ## Install From Source
@@ -81,12 +82,20 @@ SELECT text_embedding('BAAI/bge-small-en', 'Hello world!');
 
    Note: You should add the onnx library path to `ld.conf`, as environment variables may not be accessible from Postgres Server
 
-5. Test Installation
-   ```sql
-   CREATE EXTENSION lantern_extras;
-   SELECT get_available_models(); -- get available models
-   SELECT clip_text('Hello world!'); -- generate embeddings using openai clip model (textual)
-   SELECT clip_image('https://storage.googleapis.com/lanterndata/images/icon100x100.png'); -- generate embeddings using openai clip model (visual)
-   -- using any model from the list
-   SELECT text_embedding('BAAI/bge-small-en', 'Hello world!');
-   ```
+## Post Installation
+
+If you are not on Lantern Cloud, make sure you enable the extension after following the installation steps for Lantern Extras.
+
+```sql
+CREATE EXTENSION IF NOT EXISTS lantern_extras;
+```
+
+To test the installation, you can run the following SQL commands:
+
+```sql
+SELECT get_available_models(); -- get available models
+SELECT clip_text('Hello world!'); -- generate embeddings using openai clip model (textual)
+SELECT clip_image('https://storage.googleapis.com/lanterndata/images/icon100x100.png'); -- generate embeddings using openai clip model (visual)
+-- using any model from the list
+SELECT text_embedding('BAAI/bge-small-en', 'Hello world!');
+```
