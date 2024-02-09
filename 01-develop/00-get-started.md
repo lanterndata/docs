@@ -4,11 +4,9 @@
 
 The easiest way to get started with all of our tools is with [Lantern Cloud](/).
 
-We're currently in closed beta. Reach out at support@lantern.dev for access. We'd love to learn more about your use case and help out.
+In Lantern Cloud, you can create create a database with just a few clicks. Once you load your data into Lantern, you can [generate embeddings](/docs/develop/generate) with a single click from dozens of provided open source or proprietary embedding models. You can then create a vector index from your dashboard or run an index-tuning experiment to choose the best parameters for index creation.
 
-In Lantern cloud, you can create create a Lantern database with just a few clicks. Then, once you load your data into Lantern,
-you can [generate embeddings](/docs/develop/generate) with a single click from dozens of provided open source or proprietary embedding models.
-You can then create a vector index from your dashboard or run an index-tuning experiment to choose the best parameters for index creation.
+We're currently in closed beta. Reach out at support@lantern.dev for access. We'd love to learn more about your use case and help out.
 
 ## Self-Host
 
