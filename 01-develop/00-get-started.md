@@ -4,7 +4,7 @@
 
 The easiest way to get started with all of our tools is with [Lantern Cloud](/).
 
-In Lantern Cloud, you can create create a database with just a few clicks. Once you load your data into Lantern, you can [generate embeddings](/docs/develop/generate) with a single click from dozens of provided open source or proprietary embedding models. You can then create a vector index from your dashboard or run an index-tuning experiment to choose the best parameters for index creation.
+In Lantern Cloud, you can create create a database with just a few clicks. Once you load your data into Lantern, you can [generate embeddings](/docs/develop/generate) with a single click from dozens of provided open source or proprietary embedding models. You can then [create a vector index](/docs/develop/indexing) from your dashboard or run an index-tuning experiment to choose the best parameters for index creation.
 
 We're currently in closed beta. Reach out at support@lantern.dev for access. We'd love to learn more about your use case and help out.
 
@@ -20,12 +20,19 @@ You can install the tools individually by following the instructions linked.
 
 ## Overview
 
-Here is a non-comprehensive overview of what you can do with Lantern. The examples below use SQL, but we also provide client libraries for [Python](/docs/languages/python) and [JavaScript](/docs/languages/javascript).
+Here is a non-comprehensive overview of what you can do with Lantern. The examples below use SQL, but we also provide examples for [Python](/docs/languages/python), [JavaScript](/docs/languages/javascript), and [Rust](/docs/languages/rust).
 
 Create a table with an embedding column
 
 ```sql
 CREATE TABLE books (id SERIAL PRIMARY KEY, book_embedding REAL[3]);
+```
+
+Generate embeddings
+
+```sql
+SELECT text_embedding('BAAI/bge-base-en', 'My text input');
+SELECT openai_embedding('openai/text-embedding-ada-002', 'My text input');
 ```
 
 Insert embeddings
@@ -34,29 +41,16 @@ Insert embeddings
 INSERT INTO books (book_embedding) VALUES ('{0,1,0}'), ('{3,2,4}');
 ```
 
-Calculate distance and select nearest rows without using an index
+Calculate distance and select nearest rows
 
 ```sql
 SELECT book_embedding <-> '{0,0,0}' FROM books
     ORDER BY book_embedding <-> '{0,0,0}' LIMIT 1;
 ```
 
-Create an index
+Create an index to speed up nearest neighbor search
 
 ```sql
 CREATE INDEX book_index ON books USING hnsw(book_embedding dist_l2sq_ops)
     WITH (M=2, ef_construction=10, ef=4, dim=3);
-```
-
-Select nearest rows using the index
-
-```sql
-SELECT book_embedding <-> '{0,0,0}' FROM books
-    ORDER BY book_embedding <-> '{0,0,0}' LIMIT 1;
-```
-
-Generate embeddings
-
-```sql
-SELECT text_embedding('BAAI/bge-base-en', 'My text input');
 ```

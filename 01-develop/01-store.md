@@ -1,6 +1,6 @@
 # Store Embeddings
 
-Note: All operations here are designed for embeddings that are of type `INTEGER[]`, `REAL[]`, or `pgvector`'s `VECTOR` type. In the subsequent examples, we use `REAL[]`.
+Embeddings are stored in a table as a column of type `INTEGER[]`, `REAL[]`, or `pgvector`'s `VECTOR` type. This guide provides examples of how to create a table with an embedding column, insert embeddings into the table, and update or delete embeddings. Note that the examples use SQL, but we also provide examples for [Python](/docs/languages/python), [JavaScript](/docs/languages/javascript), and [Rust](/docs/languages/rust).
 
 ## Table Operations
 

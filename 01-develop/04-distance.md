@@ -1,4 +1,4 @@
-# Calculate Distance Between Embeddings
+# Calculate Distance
 
 Currently we support the following distance functions and distance operators:
 
@@ -36,7 +36,7 @@ SELECT ARRAY[0,1,0] <=> ARRAY[1,1,1];         -- Cosine
 SELECT ARRAY[0,1,0] <+> ARRAY[1,1,1];         -- Hamming
 ```
 
-You can also use the provided distance operators to fetch records based on embedding distance. If you are using an index, this query will use the index. Otherwise, it will run an exact search over all rows.
+You can also use the provided distance operators to fetch records based on embedding distance. If there is an index created for the embedding column, this query will use the index. Otherwise, it will run an exact search over all rows.
 
 ```sql
 SELECT title FROM books ORDER BY book_embedding <-> '{0,0,0}' LIMIT 2;

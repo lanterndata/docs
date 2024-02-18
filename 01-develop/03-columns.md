@@ -1,16 +1,18 @@
-# Populate an Embedding Column
+# Automatic Embedding Generation
 
 ## Lantern Cloud
 
-[Lantern Cloud](/) seamlessly supports automatically generating embeddings and inserting them into a column. To get started, navigate to the Embeddings page in the dashboard. You can generate an embedding column for a table by specifying
+[Lantern Cloud](/) supports automatic embedding generation. This means that Lantern will automatically generate embeddings for your data as you insert it into the database. This is useful for applications where you want to generate embeddings for new data as it comes in, such as for recommendation systems or similarity search.
+
+To get started, navigate to the Embeddings page in the dashboard. You can generate an embedding column for a table by specifying
 
 - Source column (e.g., `book_summary`),
-- Model (e.g., `BAAI/bge-small-en`)
+- Embedding Model (e.g., `openai/text-embedding-ada-002` or `BAAI/bge-small-en`)
 - Embedding column to insert the data into (e.g., `book_summary_embedding`)
 
-As before, the following models are available for generating embeddings.
+This will generate embeddings for your existing data, automatically update embeddings when the source column is updated, and generate embeddings for new rows as they are inserted.
 
-CONTENT_VAR_MODELS
+![Automatic Embedding generation](https://lantern.dev/videos/vector.mp4)
 
 ## Self-Hosting
 
@@ -29,6 +31,6 @@ lantern-cli create-embeddings \
     --batch-size 100
 ```
 
-You can also use the Lantern CLI [daemon](/docs/lantern-cli/daemon) to continuously generate embeddings for new columns.
+You can also use the Lantern CLI [daemon](/docs/lantern-cli/daemon) to listen to updates and inserts to update embeddings.
 
-The Lantern Cloud dashboard combines both of these processes in a seamless UI.
+The Lantern Cloud dashboard combines both of these processes in a seamless experience.
