@@ -404,4 +404,124 @@ const bookImageEmbeddings = await db
   .limit(5);
 ```
 
+## MikroORM
+
+See the [client library documentation](https://github.com/lanterndata/lantern-js/blob/main/src/mikro-orm) for more examples.
+
+Setup
+  
+```typescript
+import { MikroORM } from '@mikro-orm/postgresql';
+import { extend } from 'lanterndata/mikro-orm';
+
+const orm = await MikroORM.init({});
+const em = orm.em.fork();
+
+extend(em);
+
+await em.createLanternExtension();
+await em.createLanternExtrasExtension();
+```
+
+Create table and add index
+
+```typescript
+import { toSql } from 'lanterndata/mikro-orm';
+
+const Book = new EntitySchema({
+  name: 'Book',
+  tableName: 'books',
+  properties: {
+    id: { type: 'number', primary: true },
+    name: { type: 'string', nullable: true },
+    url: { type: 'string', nullable: true },
+    embedding: { type: 'Array<number>', nullable: true },
+  },
+});
+
+await em.execute('CREATE INDEX book_index ON books USING hnsw(embedding dist_l2sq_ops');
+
+const books = booksToInsert.map((book) =>
+  em.create(Book, {
+    ...book,
+    // use toSql method to convert [1,2,3] into '{1,2,3}'
+    embedding: toSql(book.embedding),
+  }),
+);
+
+await em.persistAndFlush(books);
+```
+
+Vector search
+
+```typescript
+await em
+  .qb(Book)
+  .orderBy({ [em.l2Distance('embedding', [1, 1, 1])]: 'ASC' })
+  .limit(5)
+  .getResult();
+
+await em
+  .qb(Book)
+  .orderBy({ [em.cosineDistance('embedding', [1, 1, 1])]: 'ASC' })
+  .limit(5)
+  .getResult();
+
+await em
+  .qb(Book)
+  .orderBy({ [em.hammingDistance('embedding', [1, 1, 1])]: 'ASC' })
+  .limit(5)
+  .getResult();
+```
+
+Vector search with embedding generation
+
+```typescript
+import { TextEmbeddingModels, ImageEmbeddingModels } from 'lanterndata/embeddings';
+const { CLIP_VIT_B_32_VISUAL } = ImageEmbeddingModels;
+
+const bookEmbeddingsOrderd = await em
+  .qb(Book, 'b1')
+  .select()
+  .where({ url: { $ne: null } })
+  .orderBy({ [em.l2Distance('embedding', em.imageEmbedding(CLIP_VIT_B_32_VISUAL, 'b1.url'))]: 'DESC' })
+  .limit(2)
+  .execute('all');
+```
+
+Generate text and image embeddings (static)
+
+```typescript
+import { TextEmbeddingModels, ImageEmbeddingModels } from 'lanterndata/embeddings';
+
+const { BAAI_BGE_BASE_EN } = TextEmbeddingModels;
+const { CLIP_VIT_B_32_VISUAL } = ImageEmbeddingModels;
+
+const text = 'hello world';
+const result = await em.generateTextEmbedding(BAAI_BGE_BASE_EN, text);
+
+const imageUrl = 'https://lantern.dev/images/home/footer.png';
+const result = await em.generateImageEmbedding(CLIP_VIT_B_32_VISUAL, imageUrl);
+```
+
+Generate text and image embeddings (dynamic)
+
+```typescript
+import { TextEmbeddingModels, ImageEmbeddingModels } from 'lanterndata/embeddings';
+
+const bookTextEmbeddings = await em
+  .qb(Book, 'b1')
+  .select(['name', em.textEmbedding(TextEmbeddingModels.BAAI_BGE_BASE_EN, 'b1.name')])
+  .where({ name: { $ne: null } })
+  .limit(5)
+  .execute('all');
+
+const bookImageEmbeddings = await em
+  .qb(Book, 'b1')
+  .select(['url', em.imageEmbedding(ImageEmbeddingModels.CLIP_VIT_B_32_VISUAL, 'b1.url')])
+  .where({ url: { $ne: null } })
+  .limit(5)
+  .execute('all');
+```
+
 ## Postgres.js
