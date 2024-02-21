@@ -16,6 +16,7 @@ lantern_create_external_index(
 	"m" INT DEFAULT 16,
 	"ef_construction" INT DEFAULT 16,
 	"ef" INT DEFAULT 16,
+	"pq" BOOL DEFAULT FALSE,
 	"index_name" TEXT DEFAULT
 );
 ```
