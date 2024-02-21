@@ -296,6 +296,112 @@ const bookImageEmbeddings = await knex('books')
     .select(selectLiteral)
 ```
 
-## Postgres.js
-
 ## Drizzle ORM
+
+See the [client library documentation](https://github.com/lanterndata/lantern-js/blob/main/src/drizzle-orm) for more examples.
+
+Setup
+
+```typescript
+import postgres from 'postgres';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import { createLanternExtension, createLanternExtrasExtension } from 'lanterndata/drizzle-orm';
+
+const client = await postgres();
+const db = drizzle(client);
+
+await db.execute(createLanternExtension());
+await db.execute(createLanternExtrasExtension());
+```
+
+Create table and add index
+
+```typescript
+const Book = pgTable('books', {
+  id: serial('id').primaryKey(),
+  name: text('name'),
+  url: text('url'),
+  embedding: real('embedding').array(),
+});
+
+await client`CREATE INDEX book_index ON books USING hnsw(embedding dist_l2sq_ops)`;
+```
+
+Vector search
+
+```typescript
+import { l2Distance, cosineDistance, hammingDistance } from 'lanterndata/drizzle-orm';
+
+await db
+  .select()
+  .from(Book)
+  .orderBy(l2Distance(Book.embedding, [1, 1, 1]))
+  .limit(5);
+
+await db
+  .select()
+  .from(Book)
+  .orderBy(cosineDistance(Book.embedding, [1, 1, 1]))
+  .limit(5);
+
+await db
+  .select()
+  .from(Book)
+  .orderBy(hammingDistance(Book.embedding, [1, 1, 1]))
+  .limit(5);
+```
+
+Vector search with embedding generation
+
+```typescript
+import { l2Distance, imageEmbedding } from 'lanterndata/drizzle-orm';
+import { TextEmbeddingModels, ImageEmbeddingModels } from 'lanterndata/embeddings';
+
+const { CLIP_VIT_B_32_VISUAL } = ImageEmbeddingModels;
+
+await db
+  .select()
+  .from(Book)
+  .orderBy(desc(l2Distance(Book.embedding, imageEmbedding(CLIP_VIT_B_32_VISUAL, Book.url))))
+  .limit(2);
+```
+
+Generate text and image embeddings (static)
+
+```typescript
+import { TextEmbeddingModels, ImageEmbeddingModels } from 'lanterndata/embeddings';
+import { generateTextEmbedding, generateImageEmbedding } from 'lanterndata/drizzle-orm';
+
+const text = 'hello world';
+const result = await db.execute(generateTextEmbedding(TextEmbeddingModels.BAAI_BGE_BASE_EN, text));
+
+const imageUrl = 'https://lantern.dev/images/home/footer.png';
+const result = await db.execute(generateImageEmbedding(ImageEmbeddingModels.CLIP_VIT_B_32_VISUAL, imageUrl));
+```
+
+Generate text and image embeddings (dynamic)
+
+```typescript
+import { textEmbedding, imageEmbedding } from 'lanterndata/drizzle-orm';
+import { TextEmbeddingModels, ImageEmbeddingModels } from 'lanterndata/embeddings';
+
+const bookTextEmbeddings = await db
+  .select({
+    name: Book.name,
+    text_embedding: textEmbedding(TextEmbeddingModels.BAAI_BGE_BASE_EN, Book.name),
+  })
+  .from(Book)
+  .where(isNotNull(Book.name))
+  .limit(5);
+
+const bookImageEmbeddings = await db
+  .select({
+    url: Book.url,
+    image_embedding: imageEmbedding(ImageEmbeddingModels.CLIP_VIT_B_32_VISUAL, Book.url),
+  })
+  .from(Book)
+  .where(isNotNull(Book.name))
+  .limit(5);
+```
+
+## Postgres.js
