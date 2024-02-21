@@ -56,21 +56,37 @@ Run `bash lantern-cli create-index --help` to get available CLI parameters
 ```bash
 Create external index
 
-Usage: lantern-cli create-index --uri <URI> --table <TABLE> --column <COLUMN> -d <DIMS> [MORE OPTIONS]
+Usage: lantern-cli create-index [OPTIONS] --uri <URI> --table <TABLE> --column <COLUMN>
 
 Options:
-  -u, --uri <URI>                  Fully associated database connection string including db name
-  -s, --schema <SCHEMA>            Schema name [default: public]
-  -t, --table <TABLE>              Table name
-  -c, --column <COLUMN>            Column name
-  -m <M>                           Number of neighbours for each vector [default: 16]
-      --efc <EFC>                  The size of the dynamic list for the nearest neighbors in construction [default: 128]
-      --ef <EF>                    The size of the dynamic list for the nearest neighbors in search [default: 64]
-  -d <DIMS>                        Dimensions of vector [default: 0]
-      --metric-kind <METRIC_KIND>  Distance algorithm [default: l2sq] [possible values: l2sq, cos, hamming]
-  -o, --out <OUT>                  Index output file [default: index.usearch]
-  -i, --import                     Import index to database (should be run as db superuser to have access)
-  -r, --remote-database            If database is not on the same server where the job is running
-      --index-name <INDEX_NAME>    Index name to use when imporrting index to database
-  -h, --help                       Print help
+  -u, --uri <URI>
+          Fully associated database connection string including db name
+  -s, --schema <SCHEMA>
+          Schema name [default: public]
+  -t, --table <TABLE>
+          Table name
+  -c, --column <COLUMN>
+          Column name
+  -p, --pq
+          Use already created codebook to create product-quantized binary index
+  -m <M>
+          Number of neighbours for each vector [default: 16]
+      --efc <EFC>
+          The size of the dynamic list for the nearest neighbors in construction [default: 128]
+      --ef <EF>
+          The size of the dynamic list for the nearest neighbors in search [default: 64]
+  -d <DIMS>
+          Dimensions of vector [default: 0]
+      --metric-kind <METRIC_KIND>
+          Distance algorithm [default: l2sq] [possible values: l2sq, cos, hamming]
+  -o, --out <OUT>
+          Index output file [default: index.usearch]
+  -i, --import
+          Import index to database (should be run as db superuser to have access)
+  -r, --remote-database <REMOTE_DATABASE>
+          If database is not on the same server where the job is running [default: true] [possible values: true, false]
+      --index-name <INDEX_NAME>
+          Index name to use when imporrting index to database
+  -h, --help
+          Print help
 ```
