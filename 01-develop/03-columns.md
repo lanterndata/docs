@@ -12,7 +12,7 @@ To get started, navigate to the Embeddings page in the dashboard. You can genera
 
 This will generate embeddings for your existing data, automatically update embeddings when the source column is updated, and generate embeddings for new rows as they are inserted.
 
-![Automatic Embedding generation](https://lantern.dev/videos/vector.mp4)
+![Automatic Embedding generation](https://lantern.dev/videos/vector.gif)
 
 ## Self-Hosting
 
