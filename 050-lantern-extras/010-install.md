@@ -7,7 +7,7 @@ Lantern Extras is a Postgres extension that enables embedding generation inside 
 We provide the [Lantern Suite](https://hub.docker.com/r/lanterndata/lantern-suite/tags) Docker image, which includes both Lantern and Lantern Extras. This enables both vector search and vector generation inside Postgres.
 
 ```bash
-docker run -p 5432:5432 --name lantern-demo -e 'POSTGRES_PASSWORD=postgres' -d lanterndata/lantern-suite:latest-pg15
+docker run -p 5432:5432 --name lantern-demo -e 'POSTGRES_PASSWORD=postgres' -d lanterndata/lantern-suite:pg15-latest
 ```
 
 Note: The image is based on the [official Postgres docker image](https://hub.docker.com/%5F/postgres). Please refer to the Postgres image documentation for a full list of supported features and flags.
