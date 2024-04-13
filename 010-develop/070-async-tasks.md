@@ -26,7 +26,7 @@ The `lantern.async_task` also accepts an optional `job_name` parameter which can
 SELECT lantern.async_task('CREATE INDEX ON my_table USING hnsw(v) WITH (m=16, ef_construction=8, ef=16);', 'Create index on my_table');
 ```
 
-You can view progres of asynchronous tasks by querying the `lantern.tasks` table which has the structure below:
+You can view progress of asynchronous tasks by querying the `lantern.tasks` table which has the structure below:
 
 ```bash
                                                Table "lantern.tasks"
