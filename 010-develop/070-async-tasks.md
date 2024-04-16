@@ -42,3 +42,9 @@ You can view progress of asynchronous tasks by querying the `lantern.tasks` tabl
  status           | text                     |           |          |
  error_message    | text                     |           |          |
 ```
+
+## Setup
+
+The easiest way to use asynchronous tasks is with [Lantern Cloud](/), which supports asynchronous tasks out-of-the-box.
+
+To use asynchronous tasks in a self-hosted environment, ensure that both the [`pg_cron`](https://github.com/citusdata/pg_cron) and [`lantern`](https://github.com/lanterndata/lantern) extensions are installed. [Lantern Suite](https://github.com/lanterndata/lantern-suite) is a Docker image that comes with both extensions pre-installed.
