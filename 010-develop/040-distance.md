@@ -1,6 +1,10 @@
 # Calculate Distance
 
-Currently we support the following distance functions and distance operators:
+This section provides examples of how to calculate the distance between vectors and rows in a table. The examples use the `books` table with the `book_embedding` column, which contains the embeddings of books.
+
+## Overview
+
+Currently we support the following distance functions and distance operators for calculating the distance between vectors.
 
 ```table
 | Distance metric | Distance function| Distance operator | Supported data types         |

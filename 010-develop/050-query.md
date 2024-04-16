@@ -1,5 +1,7 @@
 # Query Embeddings
 
+This section provides examples of how to query a table for the rows with the nearest embeddings to a given vector or row. The examples use the `books` table with the `book_embedding` column, which contains the embeddings of books.
+
 ## Get the nearest rows to a vector
 
 Retrieve the two closest rows by vector distance:
