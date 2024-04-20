@@ -14,7 +14,7 @@ Suppose you already have a Postgres table with a vector index created using pgve
 CREATE EXTENSION vector;
 CREATE TABLE lantern_pgvector (id SERIAL, v vector(3)); -- 'vector' is the type provided by pgvector
 INSERT INTO lantern_pgvector (v) VALUES ('[0,0,0]'), ('[0,1,0]'), ('[1,0,0]');
-CREATE INDEX vector_idx ON lantern_pgvector USING hnsw(v vector_l2_ops) WITH (m=4, ef_construction=8); -- This 'hnsw' access method is provided by pgvector
+CREATE INDEX vector_idx ON lantern_pgvector USING lantern_hnsw(v vector_l2_ops) WITH (m=4, ef_construction=8); -- This 'hnsw' access method is provided by pgvector
 ```
 
 You can install Lantern over it without any issues

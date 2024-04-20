@@ -139,7 +139,7 @@ This variable has priority over the `ef` option specified in the index creation.
 If you create an index like this
 
 ```sql
-CREATE INDEX ON lantern_demo USING hnsw(v) WITH (m=4, ef_construction=8, ef=16);
+CREATE INDEX ON lantern_demo USING lantern_hnsw(v) WITH (m=4, ef_construction=8, ef=16);
 ```
 
 And do a query like this

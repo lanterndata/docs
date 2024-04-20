@@ -124,7 +124,7 @@ const Book = sequelize.define('Book', {
 });
 
 await sequelize.query(`
-  CREATE INDEX book_index ON books USING hnsw(book_embedding dist_l2sq_ops)
+  CREATE INDEX book_index ON books USING lantern_hnsw(book_embedding dist_l2sq_ops)
   WITH (M=2, ef_construction=10, ef=4, dims=3);
 `);
 ```
@@ -226,7 +226,7 @@ await knex.schema.createTable('books', (table) => {
   table.specificType('embedding', 'REAL[]');
 
   knex.raw(`
-    CREATE INDEX book_index ON books USING hnsw(book_embedding dist_l2sq_ops)
+    CREATE INDEX book_index ON books USING lantern_hnsw(book_embedding dist_l2sq_ops)
     WITH (M=2, ef_construction=10, ef=4, dims=3);
   `);
 });
@@ -324,7 +324,7 @@ const Book = pgTable('books', {
   embedding: real('embedding').array(),
 });
 
-await client`CREATE INDEX book_index ON books USING hnsw(embedding dist_l2sq_ops)`;
+await client`CREATE INDEX book_index ON books USING lantern_hnsw(embedding dist_l2sq_ops)`;
 ```
 
 Vector search
@@ -439,7 +439,7 @@ const Book = new EntitySchema({
   },
 });
 
-await em.execute('CREATE INDEX book_index ON books USING hnsw(embedding dist_l2sq_ops');
+await em.execute('CREATE INDEX book_index ON books USING lantern_hnsw(embedding dist_l2sq_ops');
 
 const books = booksToInsert.map((book) =>
   em.create(Book, {

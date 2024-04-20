@@ -51,6 +51,6 @@ SELECT book_embedding <-> '{0,0,0}' FROM books
 Create an index to speed up nearest neighbor search
 
 ```sql
-CREATE INDEX book_index ON books USING hnsw(book_embedding dist_l2sq_ops)
+CREATE INDEX book_index ON books USING lantern_hnsw(book_embedding dist_l2sq_ops)
     WITH (M=2, ef_construction=10, ef=4, dim=3);
 ```
