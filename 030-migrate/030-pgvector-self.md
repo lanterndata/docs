@@ -58,7 +58,7 @@ To completely remove `pgvector` from your database, there are a few approaches. 
    It should generate output such as
 
    ```sql
-   CREATE INDEX your_table_embedding_idx ON public.your_table USING hnsw (embedding vector_l2_ops) WITH (m='16', ef_construction='64')
+   CREATE INDEX your_table_embedding_idx ON public.your_table USING lantern_hnsw (embedding vector_l2_ops) WITH (m='16', ef_construction='64')
    ```
 
    Save this output for later to re-create your vector indexes.
@@ -132,13 +132,13 @@ To completely remove `pgvector` from your database, there are a few approaches. 
    `pgvector` uses the syntax
 
    ```sql
-   CREATE INDEX ON items USING hnsw (embedding vector_l2_ops) WITH (m = 16, ef_construction = 64);
+   CREATE INDEX ON items USING lantern_hnsw (embedding vector_l2_ops) WITH (m = 16, ef_construction = 64);
    ```
 
    Lantern uses the syntax
 
    ```sql
-   CREATE INDEX ON small_world USING hnsw (vector dist_l2sq_ops)
+   CREATE INDEX ON small_world USING lantern_hnsw (vector dist_l2sq_ops)
    WITH (M=2, ef_construction=10, ef=4, dim=3);
    ```
 

@@ -5,7 +5,7 @@
 To create an index you can use the following syntax:
 
 ```sql
-CREATE INDEX ON [TABLE] USING hnsw ([column] [operator class])
+CREATE INDEX ON [TABLE] USING lantern_hnsw ([column] [operator class])
     WITH (M=[int], ef_construction=[int], ef=[int], dim=[int]);
 ```
 
