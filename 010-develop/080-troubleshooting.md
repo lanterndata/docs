@@ -7,7 +7,7 @@ You can check if the index exists by querying the `pg_indexes` table.
 For example, if you created an index on the `books` table, you might expect to see an entry in the `pg_indexes` table similar to below
 
 ```sql
-SELECT indexdef FROM pg_indexes WHERE indexdef LIKE '%USING hnsw%';
+SELECT indexdef FROM pg_indexes WHERE indexdef LIKE '%USING lantern_hnsw%';
                                                     indexdef
 ---------------------------------------------------------------------------------------------------------------------------------
 CREATE INDEX books_embedding_idx ON public.books hnsw (embedding dist_cos_ops) WITH (ef_construction='128', ef='64', m='10', dim='1024')
