@@ -13,6 +13,7 @@
 | `BAAI/bge-small-en`                       | 384        | 512        |
 | `BAAI/bge-base-en`                        | 768        | 512        |
 | `BAAI/bge-large-en`                       | 1024       | 512        |
+| `BAAI/bge-m3`                             | 1024       | 8192       |
 | `jinaai/jina-embeddings-v2-small-en`      | 512        | 8192       |
 | `jinaai/jina-embeddings-v2-base-en`       | 768        | 8192       |
 ```

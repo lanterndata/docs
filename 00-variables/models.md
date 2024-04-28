@@ -14,6 +14,7 @@
 | `BAAI/bge-small-en`                       | 384        | 512        | Text       | ort      |
 | `BAAI/bge-base-en`                        | 768        | 512        | Text       | ort      |
 | `BAAI/bge-large-en`                       | 1024       | 512        | Text       | ort      |
+| `BAAI/bge-m3`                             | 1024       | 8192       | Text       | ort      |
 | `jinaai/jina-embeddings-v2-small-en`      | 512        | 8192       | Text       | ort      |
 | `jinaai/jina-embeddings-v2-base-en`       | 768        | 8192       | Text       | ort      |
 | `openai/text-embedding-ada-002`           | 1536       | 8192       | Text       | openai   |
