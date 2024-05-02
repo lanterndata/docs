@@ -15,21 +15,25 @@ The advantage of the function is that it allows using the vector index on each o
 The API of the function is below:
 
 ```sql
-weighted_vector_search(
-  relation_type, -- Type of the specific relation containing all the vectors
-  max_dist double precision, -- Maximum weighted distance to keep
-  w1 double precision, -- Weight of the first vector
+lantern.weighted_vector_search(
+  relation_type anyelement, -- Type of the specific relation containing all the vectors
+  w1 numeric, -- Weight of the first vector
   col1 text, -- Column name of the first vector
   vec1 vector, -- Query vector constant for the first column vector
-
-  w2 double precision = 0, ...
-  col2 text = NULL,
-  vec2 vector = NULL,
-
-  w3 double precision = 0,...
-  col3 text = NULL,
-  vec3 vector = NULL)
-  RETURNS TABLE of relation_type containing only relevant rows
+  w2 numeric = 0, -- Weight of the second vector
+  col2 text = NULL, -- Column name of the second vector
+  vec2 vector = NULL, -- Query vector constant for the second column vector
+  w3 numeric = 0, -- Weight of the third vecto
+  col3 text = NULL, -- Column name of the third vector
+  vec3 vector = NULL, -- Query vector constant for the third column vector
+  ef integer = 100, -- The number of elements to consider during the search
+  max_dist numeric = NULL, -- Maximum weighted distance to keep
+  distance_operator text = '<->', -- The distance operator to use (default: '<->', which represents L2 distance)
+  id_col text = 'id', -- The name of the ID column
+  exact boolean = false, -- A boolean flag indicating whether to perform an exact search
+  debug_output boolean = false, -- A boolean flag to enable debug output
+  analyze_output boolean = false -- A boolean flag to enable analyze output
+) RETURNS TABLE -- of relation_type containing only relevant rows
 ```
 
 The function filters all results that have total weighted distance smaller than `max_dist`.
