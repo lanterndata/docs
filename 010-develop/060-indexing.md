@@ -31,12 +31,16 @@ WITH (
 The following distance metrics are available for indexes, using the corresponding operator classes.
 
 ```table
-| Distance metric | Distance operator class     | Supported data types |
-|---------------- | --------------------------- | -------------------- |
-|**Euclidean**    | `dist_l2sq_ops`             | `REAL[]`, `VECTOR`   |
-|**Cosine**       | `dist_cos_ops`              | `REAL[]`, `VECTOR`   |
-|**Hamming**      | `dist_hamming_ops`          | `INTEGER[]`          |
+| Distance metric | Distance operator class     | Supported data types | Distance operator    |
+|---------------- | --------------------------- | -------------------- | -------------------- |
+|**Euclidean**    | `dist_l2sq_ops`             | `REAL[]`, `VECTOR`   | `<->`                |
+|**Cosine**       | `dist_cos_ops`              | `REAL[]`, `VECTOR`   | `<=>`                |
+|**Hamming**      | `dist_hamming_ops`          | `INTEGER[]`          | `<+>`                |
 ```
+
+The index is created using a specified distance metric. As such, vector queries should use the corresponding distance operator. For example, an index created with the `dist_l2sq_ops` operator class should be queried using the `<->` operator.
+
+If an operator is used that does not have a corresponding index with the same operator class, the query will not use the index and will run an exact search over all rows.
 
 ## Index Parameters
 
