@@ -160,13 +160,11 @@ k-means clustering is a memory-intensive operation. If the dataset is too large,
 
 ### create_pq_codebook
 
-Unlike `quantize_table`, `create_pq_codebook` only creates the codebook without creating the column It has the same arguments as `quantize_table`.
+Unlike `quantize_table`, `create_pq_codebook` only creates the codebook without creating the column. It has the same arguments as `quantize_table`.
 
 ### quantize_vector
 
-Unlike `quantize_table`, `quantize_vector` creates a new column with the quantized vectors.
-
-If a PQ codebook already exists, use the function `quantize_vector` to create a new column with the quantized vectors.
+If a PQ codebook already exists, use the function `quantize_vector` to retrieve the quantized vector.
 
 ```sql
 quantize_vector(v REAL[], codebook regclass, distance_metric TEXT)
@@ -197,7 +195,7 @@ distance_metric
 TEXT
 ```
 
-The distance metric to use for quantization. The supported distance metrics are `euclidean`, `cosine`, and `hamming`.
+The distance metric to use for quantization. The supported distance metrics are `l2sq`, `cos`, and `hamming`.
 
 ### dequantize_vector
 
