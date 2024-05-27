@@ -39,7 +39,7 @@ The function filters all results that have total weighted distance smaller than 
 Let's start by creating an example table with text and vector columns to demonstrate the usage of the `weighted_vector_search` function.
 
 ```sql
-REATE TABLE products (
+CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name TEXT,
     description TEXT,
