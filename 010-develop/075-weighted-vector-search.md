@@ -16,23 +16,26 @@ The API of the function is below:
 
 ```sql
 weighted_vector_search(
-  relation_type, -- Type of the specific relation containing all the vectors
-  max_dist double precision, -- Maximum weighted distance to keep
-  w1 double precision, -- Weight of the first vector
+  relation_type anyelement, -- Type of the specific table containing all the vectors
+  w1 numeric, -- Weight of the first vector
   col1 text, -- Column name of the first vector
   vec1 vector, -- Query vector constant for the first column vector
-
-  w2 double precision = 0, ...
-  col2 text = NULL,
-  vec2 vector = NULL,
-
-  w3 double precision = 0,...
-  col3 text = NULL,
-  vec3 vector = NULL)
-  RETURNS TABLE of relation_type containing only relevant rows
+  w2 numeric = 0, -- Weight of the second vector
+  col2 text = NULL, -- Column name of the second vector (optional)
+  vec2 vector = NULL, -- Query vector constant for the second column vector (optional)
+  w3 numeric = 0, -- Weight of the third vector
+  col3 text = NULL, -- Column name of the third vector (optional)
+  vec3 vector = NULL, -- Query vector constant for the third column vector (optional)
+  ef integer = 100, -- Number of trees to search in the index
+  max_dist numeric = NULL, -- Maximum weighted distance to keep
+  id_col text = 'id', -- Column name of the id column
+  exact boolean = false, -- If true, use exact search instead of approximate
+  debug_output boolean = false, -- If true, print debug output
+  analyze_output boolean = false -- If true, print analyze output
+) RETURNS TABLE
 ```
 
-The function filters all results that have total weighted distance smaller than `max_dist`.
+The function returns a table of the same type as the input relation, containing only the relevant rows. It calculates the weighted distance between the query vectors and the vectors in the table, and filters the results based on the `max_dist` parameter if specified. If `max_dist` is not specified, it returns the total number of rows if the total number of rows is less than `ef`. Otherwise, it returns between `ef` and `ef * number of columns` results.
 
 ## Example Usage
 
@@ -74,3 +77,15 @@ In this example, we search for products with a maximum weighted distance of 5.0 
 This query will return the name, description, and category of products that are most relevant to the query vector, with a higher emphasis on the product description.
 
 We can control which column is more important for our query by adjusting the weights.
+
+To query the table without a `max_dist` and return at most 5 results, we can use the following query:
+
+```sql
+SELECT name, description, category
+FROM weighted_vector_search(
+    CAST(NULL AS products),
+    w1 => 2.0, col1 => 'description', vec1 => /* vector describing car environment s*/,
+    w2 => 1.0, col2 => 'category', vec2 => /* vector describing car environments */
+)
+LIMIT 5;
+```
