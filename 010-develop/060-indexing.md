@@ -17,7 +17,7 @@ CREATE INDEX
 ON
     books
 USING
-    hnsw (book_embedding dist_l2sq_ops)
+    lantern_hnsw (book_embedding dist_l2sq_ops)
 WITH (
     M = 2,
     ef_construction = 10,
