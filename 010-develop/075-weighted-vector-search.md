@@ -15,7 +15,7 @@ The advantage of the function is that it allows using the vector index on each o
 The API of the function is below:
 
 ```sql
-weighted_vector_search(
+lantern.weighted_vector_search(
   relation_type anyelement, -- Type of the specific table containing all the vectors
   w1 numeric, -- Weight of the first vector
   col1 text, -- Column name of the first vector
@@ -39,7 +39,7 @@ The function returns a table of the same type as the input relation, containing 
 
 ## Example Usage
 
-Let's start by creating an example table with text and vector columns to demonstrate the usage of the `weighted_vector_search` function.
+Let's start by creating an example table with text and vector columns to demonstrate the usage of the `lantern.weighted_vector_search` function.
 
 ```sql
 CREATE TABLE products (
@@ -60,11 +60,11 @@ VALUES
 
 In this example, we have a products table with columns for name, description, category, and an embedding column of type `VECTOR(1536)` to store vector representations of the product data.
 
-To perform a weighted vector search on this table, we can use the `weighted_vector_search` function. Let's say we want to find products related to cars, with a focus on the product description and category.
+To perform a weighted vector search on this table, we can use the `lantern.weighted_vector_search` function. Let's say we want to find products related to cars, with a focus on the product description and category.
 
 ```sql
 SELECT name, description, category
-FROM weighted_vector_search(
+FROM lantern.weighted_vector_search(
     CAST(NULL AS products),
     max_dist => 5.0,
     w1 => 2.0, col1 => 'description', vec1 => /* vector describing car environment s*/,
@@ -82,7 +82,7 @@ To query the table without a `max_dist` and return at most 5 results, we can use
 
 ```sql
 SELECT name, description, category
-FROM weighted_vector_search(
+FROM lantern.weighted_vector_search(
     CAST(NULL AS products),
     w1 => 2.0, col1 => 'description', vec1 => /* vector describing car environment s*/,
     w2 => 1.0, col2 => 'category', vec2 => /* vector describing car environments */
