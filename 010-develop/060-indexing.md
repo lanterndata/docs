@@ -78,8 +78,7 @@ The size of the dynamic list for the nearest neighbors (used during search). Hig
 
 Maximum allowed value for `ef` is 400
 
-This parameter is also controlled via session based `hnsw.ef` variable, which has precedence over this parameter
-`sql SET hnsw.ef=128`
+This parameter is also controlled via session based `hnsw.ef` variable, which has precedence over this parameter. It can be set by running `SET hnsw.ef=128` before the query.
 
 ---
 
