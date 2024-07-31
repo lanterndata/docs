@@ -59,3 +59,11 @@ You can also use the distance operator, as seen below, and get an exact search i
 ```sql
 SELECT * FROM books ORDER BY book_embedding <-> '{0,0,0}' LIMIT 2;
 ```
+
+## Control number of elements retrieved from the index
+
+By default, Lantern reads `lantern_hnsw.ef` nearest vectors from the index. The parameter can be changed via `SET lantern_hnsw.ef = 200` and defaults to 64.
+
+It is possible that this initial batch of results is not enough to satisfy the higher level query (e.g. because of a larger LIMIT value, for WHERE filters that renders some index results irrelevant).
+In those scenarios Lantern will continue querying the index in a streaming fassion for up to 1000 vectors. The limit is not configurable (at least for now) and is instead chosen to balance between accuracy and performance.
+If you think you need larger streaming limits, creating metadata-filtered partial indexes may be a better path to take.
