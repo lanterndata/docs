@@ -9,7 +9,7 @@
    Navigate to the root directory and execute
 
    ```bash
-   docker build -t lantern-dev -f Dockerfile.dev .
+   docker build -t lantern-dev -f docker/Dockerfile.dev .
    ```
 
 2. Run the Docker container
