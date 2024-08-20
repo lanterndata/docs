@@ -33,8 +33,10 @@ The following distance metrics are available for indexes, using the correspondin
 ```table
 | Distance metric | Distance operator class     | Supported data types | Distance operator    |
 |---------------- | --------------------------- | -------------------- | -------------------- |
-|**Euclidean**    | `dist_l2sq_ops`             | `REAL[]`, `VECTOR`   | `<->`                |
-|**Cosine**       | `dist_cos_ops`              | `REAL[]`, `VECTOR`   | `<=>`                |
+|**Euclidean**    | `dist_l2sq_ops`             | `REAL[]`             | `<->`                |
+|**Euclidean**    | `dist_vec_l2sq_ops`         | `VECTOR`             | `<->`                |
+|**Cosine**       | `dist_cos_ops`              | `REAL[]`             | `<=>`                |
+|**Cosine**       | `dist_vec_cos_ops`          | `VECTOR`             | `<=>`                |
 |**Hamming**      | `dist_hamming_ops`          | `INTEGER[]`          | `<+>`                |
 ```
 
