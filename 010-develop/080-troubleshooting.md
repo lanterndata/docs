@@ -20,7 +20,7 @@ You can use `EXPLAIN` to validate if you are using the index.
 For example, this query is using a sequential scan. This means that an index is not being used to make search faster, and the query performs an exact search over all rows.
 
 ```sql
-EXPLAIN (COSTS FALSE) SELECT 1 FROM books WHERE v <-> '{0,0,0}';
+EXPLAIN (COSTS FALSE) SELECT 1 FROM books ORDER BY v <-> '{0,0,0}';
             QUERY PLAN
 -----------------------------------
  Limit
