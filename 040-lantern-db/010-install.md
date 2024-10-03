@@ -37,7 +37,7 @@ Note: You can replace `LDB_VERSION` with the version you want to install
 
 ```bash
 cd /tmp
-LDB_VERSION=0.1.1
+LDB_VERSION=0.3.4
 wget "https://github.com/lanterndata/lantern/releases/download/v${LDB_VERSION}/lantern-${LDB_VERSION}.tar"
 tar xf "lantern-${LDB_VERSION}.tar"
 cd "lantern-${LDB_VERSION}"

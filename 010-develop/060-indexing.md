@@ -76,11 +76,11 @@ number
 default: 64
 ```
 
-The size of the dynamic list for the nearest neighbors (used during search). Higher `ef` leads to more accurate but slower search. (this parameter is also controlled via seesion based `hnsw.ef` variable)
+The size of the dynamic list for the nearest neighbors (used during search). Higher `ef` leads to more accurate but slower search. (this parameter is also controlled via seesion based `lantern_hnsw.ef` variable)
 
 Maximum allowed value for `ef` is 400
 
-This parameter is also controlled via session based `hnsw.ef` variable, which has precedence over this parameter. It can be set by running `SET hnsw.ef=128` before the query.
+This parameter is also controlled via session based `lantern_hnsw.ef` variable, which has precedence over this parameter. It can be set by running `SET hnsw.ef=128` before the query.
 
 ---
 
@@ -96,18 +96,29 @@ Maximum allowed dimensions for now is 2000
 ---
 
 ```documentation
-_experimental_index_path
-string
+quant_bits
+number
+default: 32
 ```
 
-Path to index file created via [Lantern CLI](https://github.com/lanterndata/lantern_extras#lantern-index-builder)
+Number of bits to use for scalar quantization.  
+Default value is 32 (`f32`) which means to not apply any quantization over vector elements
 
-In order for the index file to function properly, it should be present in the server where the database is running and accessible to the user running the database.
+Allowed values (1, 8, 16, 32)
 
 ---
 
 ```documentation
-hnsw.init_k
+external
+bool
+```
+
+Connect to external indexing server using `lantern.external_index_*` GUC variables and do the indexing process in an external server.
+
+---
+
+```documentation
+lantern_hnsw.init_k
 string
 default: 10
 ```
@@ -117,22 +128,22 @@ Number of items you are expecting from index to return. This is session based va
 It is important to set this value according the `LIMIT` in your query or the search performance will be decreased. For example if you do a query like this
 
 ```sql
-SELECT * FROM lantern_demo WHERE v <-> ARRAY[1,1,1] LIMIT 100;
+SELECT * FROM lantern_demo ORDER BY v <-> ARRAY[1,1,1] LIMIT 100;
 ```
 
-You should set the `hnsw.init_k` to 100. So the query will become like this
+You should set the `lantern_hnsw.init_k` to 100. So the query will become like this
 
 ```sql
-SET hnsw.init_k = 100;
-SELECT * FROM lantern_demo WHERE v <-> ARRAY[1,1,1] LIMIT 100;
+SET lantern_hnsw.init_k = 100;
+SELECT * FROM lantern_demo ORDER BY v <-> ARRAY[1,1,1] LIMIT 100;
 ```
 
-Maximum allowed value for `hnsw.init_k` is 1000
+Maximum allowed value for `lantern_hnsw.init_k` is 1000
 
 ---
 
 ```documentation
-hnsw.ef
+lantern_hnsw.ef
 string
 default: 64
 ```
@@ -150,10 +161,40 @@ CREATE INDEX ON lantern_demo USING lantern_hnsw(v) WITH (m=4, ef_construction=8,
 And do a query like this
 
 ```sql
-SET hnsw.ef = 128;
-SELECT * FROM lantern_demo WHERE v <-> ARRAY[1,1,1];
+SET lantern_hnsw.ef = 128;
+SELECT * FROM lantern_demo ORDER BY v <-> ARRAY[1,1,1];
 ```
 
 Your query will run with `ef` parameter set to 128 instead of 16.
 
-Maximum allowed value for `hnsw.ef` is 400
+Maximum allowed value for `lantern_hnsw.ef` is 400
+
+```documentation
+lantern.external_index_host
+string
+default: 127.0.0.1
+```
+
+Host of the server where [Lantern External Index Server](https://github.com/lanterndata/lantern_extras?tab=readme-ov-file#lantern-index-server) is running
+
+---
+
+```documentation
+lantern.external_index_port
+number
+default: 8998
+```
+
+Port of the external indexing server
+
+---
+
+```documentation
+lantern.external_index_secure
+bool
+default: true
+```
+
+If set to true it will try to initialize TLS connection when connecting to external indexing server
+
+---

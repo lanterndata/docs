@@ -1,4 +1,6 @@
-# Create External index
+# Create External Index
+
+**This functionality is deprecated please use the [new version](/docs/lantern-cli/indexing) of external indexing**
 
 The Lantern Extras Postgres extension enables creating an external index directly from SQL using the `lantern_create_external_index` function and the `lantern_reindex_external_index` function.
 
