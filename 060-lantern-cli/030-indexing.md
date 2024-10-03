@@ -1,8 +1,6 @@
 # Indexing Server
 
-With the Lantern CLI's `start-indexing-server` routine, you can create an HNSW index externally to Postgres, without consuming database resources.
-
-You can read more about how we were able to improve index creation times by 30x over `pgvector` in [this](/blog/hnsw-index-creation) blog post.
+With Lantern CLI's `start-indexing-server` routine, you can create an HNSW index externally to Postgres, without consuming database resources.
 
 ## Prerequisites
 
@@ -24,22 +22,27 @@ INSERT INTO embeddings (v) VALUES ('{0,0,0}'), ('{0,1,0}'), ('{1,0,0}');
 lantern-cli start-indexing-server --host 127.0.0.1 --port 8998 --status-port 8990
 ```
 
-After this the indexing server will start listening on port 8998 and the status server will be available on port 8990  
-The startus server can be used to query the current state of the indexing server:  
+After this, the indexing server will start listening on port 8998 and the status server will be available on port 8990.
+
+The status server can be used to query the current state of the indexing server:  
+
 ```bash
 $ curl http://127.0.0.1:8990  
 
 {"status":0,"status_updated_at":1727964328269}
 ```
-the status can be one of the following values:  
-`0` - Idle
-`1` - In Progress
-`2` - Failed
-`3` - Succeded
 
-Indexing server can accept only one connection at a time, because the indexing process will consume all available CPU resources.  
+The status can be one of the following values:  
+
+- `0` - Idle
+- `1` - In Progress
+- `2` - Failed
+- `3` - Succeded
+
+The indexing server can accept only one connection at a time, because the indexing process will consume all available CPU resources.  
 
 The server also accepts `--cert` and `--key` parameters which are SSL certificate and certificate key files.  
+
 Self signed certificate can be generated using the following command:
 
 ```bash
@@ -59,10 +62,11 @@ SET lantern.external_index_secure=false; -- set this to true for SSL servers
 CREATE INDEX ON embeddings USING lantern_hnsw(v dist_cos_ops) WITH (m=12, ef_construction=64, external=true);
 ```
 
-With the `lantern.external_index_*` GUC variables we are configuring the destination of our external indexing server and wether to use TLS connection or not.  
-When `external=true` parameter will be passed on `CREATE INDEX` statement, the database will connect to the provided external indexing endpoint, stream tuples and receive back the index file.
+With the `lantern.external_index_*` GUC variables we are configuring the destination of our external indexing server and whether to use TLS connection.
 
-You can read more about external indexing in the blog post [here](/blog/hnsw-index-creation)
+When the `external=true` parameter is be passed in the `CREATE INDEX` statement, the database will connect to the provided external indexing endpoint, stream tuples and receive back the index file.
+
+You can read more about external indexing in the blog post [here](/blog/pgvector-external-indexing).
 
 ```sql
 -- verify that index is created properly
