@@ -83,7 +83,7 @@ In case of `start-daemon` command, just pass `-v lantern-daemon-data:/var/lib/la
 
 ### Use our releases from GitHub
 
-You can download prebuilt binaries from our [releases](https://github.com/lanterndata/lantern_extras/releases) page
+You can download prebuilt binaries from our [releases](https://github.com/lanterndata/lantern/releases) page
 
 ## Install With Cargo
 
@@ -96,7 +96,7 @@ You can download prebuilt binaries from our [releases](https://github.com/lanter
 ### Installation
 
 ```bash
-cargo install --git https://github.com/lanterndata/lantern_extras.git
+cargo install --git https://github.com/lanterndata/lantern.git
 ```
 
 ### Verify installation

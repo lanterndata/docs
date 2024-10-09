@@ -80,10 +80,8 @@ brew install lantern && lantern_install
 ```bash
 git clone --recursive https://github.com/lanterndata/lantern.git
 cd lantern
-mkdir build
-cd build
-cmake ..
-make install
+cmake -DMARCH_NATIVE=ON -S lantern_hnsw -B build
+make -C build install -j
 ```
 
 ## Post Installation
