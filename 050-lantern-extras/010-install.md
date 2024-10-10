@@ -31,7 +31,7 @@ Note: You can replace `VERSION` with the version you want to install
 ```bash
 cd /tmp
 VERSION=0.1.0
-wget "https://github.com/lanterndata/lantern/releases/download/v${VERSION}/lantern-extras-${VERSION}.tar"
+wget "https://github.com/lanterndata/lantern/releases/download/v${VERSION}/lantern-${VERSION}.tar"
 tar xf "lantern-${VERSION}.tar"
 cd "lantern-${VERSION}"
 make install
