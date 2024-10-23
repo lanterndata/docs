@@ -8,11 +8,9 @@ In Lantern Cloud, you can create create a database with just a few clicks. Once 
 
 ## Ubicloud
 
-Lantern is also available as a managed offering on [Ubicloud](https://ubicloud.com).
+Lantern is also available as a managed offering on [Ubicloud](https://ubicloud.com). You'll still receive direct support from the Lantern team for instances on Ubicloud.
 
 Ubicloud is an open-source alternative to AWS. It offers cloud services like virtual machines, block storage, and managed Postgres at rates 2-10x lower than hyperscalers like AWS, Azure, and GCP.
-
-Even when hosted on Ubicloud, you’ll receive direct support from the Lantern team for a seamless experience.
 
 ## Self-Host
 
