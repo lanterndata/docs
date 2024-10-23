@@ -6,7 +6,13 @@ The easiest way to get started with all of our tools is with [Lantern Cloud](/).
 
 In Lantern Cloud, you can create create a database with just a few clicks. Once you load your data into Lantern, you can [generate embeddings](/docs/develop/generate) with a single click from dozens of provided open source or proprietary embedding models. You can then [create a vector index](/docs/develop/indexing) from your dashboard or run an index-tuning experiment to choose the best parameters for index creation.
 
-We're currently in closed beta. Reach out at support@lantern.dev for access. We'd love to learn more about your use case and help out.
+## Ubicloud
+
+Lantern is also available as a managed offering on [Ubicloud](https://ubicloud.com).
+
+Ubicloud is an open-source alternative to AWS. It offers cloud services like virtual machines, block storage, and managed Postgres at rates 2-10x lower than hyperscalers like AWS, Azure, and GCP.
+
+Even when hosted on Ubicloud, you’ll receive direct support from the Lantern team for a seamless experience.
 
 ## Self-Host
 
