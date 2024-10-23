@@ -205,7 +205,7 @@ If a codebook exists, you can dequantize a vector using the `dequantize_vector` 
 dequantize_vector(v pqvec, codebook regclass)
 ```
 
---- d
+---
 
 ```documentation
 v
