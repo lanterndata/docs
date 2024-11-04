@@ -26,6 +26,8 @@ WITH (
 );
 ```
 
+In general, lower values of `M` and `ef_construction` improve search speed and lowers index creation times, at the cost of recall. Tuning these parameters will require experimentation for your specific use case.
+
 ## Operator classes
 
 The following distance metrics are available for indexes, using the corresponding operator classes.
@@ -52,7 +54,7 @@ number
 default: 16
 ```
 
-The number of bi-directional links created for every new element during construction. Reasonable range for `m` is 2-100. Higher `m` work better on datasets with high intrinsic dimensionality and/or high recall, while low `m` work better for datasets with low intrinsic dimensionality and/or low recalls.
+The number of bi-directional links created for every new element during construction. Reasonable range for `m` is 2-100. Higher `m` works better on datasets with high dimensionality and/or high recall, while low `m` works better for datasets with low dimensionality and/or low recalls.
 
 Maximum allowed value for `m` is 128
 

@@ -5,7 +5,7 @@ With the Lantern CLI's `autotune-index` routine, you can autotune an HNSW and fi
 ## Prerequisites
 
 - [Lantern CLI](/docs/lantern-cli/install)
-- Postgres database with the [Lantern extension](/docs/lantern-db/install) installed
+- Postgres database with the [Lantern HNSW extension](/docs/lantern-hnsw/install) installed
 
 ## Run Index Autotune
 

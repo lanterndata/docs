@@ -5,7 +5,7 @@ With Lantern CLI's `start-indexing-server` routine, you can create an HNSW index
 ## Prerequisites
 
 - [Lantern CLI](/docs/lantern-cli/install)
-- Postgres database with the [Lantern extension](/docs/lantern-db/install) installed
+- Postgres database with the [Lantern HNSW extension](/docs/lantern-hnsw/install) installed
 
 ### Set Up Data
 

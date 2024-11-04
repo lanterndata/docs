@@ -16,7 +16,7 @@ Ubicloud is an open-source alternative to AWS. It offers cloud services like vir
 
 Alternatively, you can also use our tools locally or self-host them. There are three tools that are provided out-of-the-box with Lantern Cloud.
 
-- [Lantern](/docs/lantern-db/install), our core Postgres extension, provides vector search in Postgres.
+- [Lantern HNSW](/docs/lantern-hnsw/install), our core Postgres extension, provides vector search in Postgres.
 - [Lantern Extras](/docs/lantern-extras/install), which further extends Postgres to support embedding generation.
 - [Lantern CLI](/docs/lantern-cli/install) provides routines for generating embeddings and indexes.
 

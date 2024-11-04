@@ -1,6 +1,10 @@
 # Installation
 
-Lantern is a Postgres extension that provides vector search inside Postgres. It is available as a Docker image, a Homebrew package, a binary, or from source.
+`lantern_hnsw` is a Postgres extension that provides vector search inside Postgres.
+
+Lantern builds and uses [usearch](https://github.com/unum-cloud/usearch), a single-header state-of-the-art HNSW implementation.
+
+It is available as a Docker image, a Homebrew package, a binary, or from source.
 
 ## Run with Docker
 
@@ -22,7 +26,7 @@ Note: The image is based on the [official Postgres docker image](https://hub.doc
 
 ### Prerequisites
 
-- PostgreSQL 11, 12, 13, 14, 15 or 16
+- PostgreSQL 11, 12, 13, 14, 15, 16, 17
 
 ### Supported platforms
 
@@ -37,7 +41,7 @@ Note: You can replace `LDB_VERSION` with the version you want to install
 
 ```bash
 cd /tmp
-LDB_VERSION=0.3.4
+LDB_VERSION=0.4.1
 wget "https://github.com/lanterndata/lantern/releases/download/v${LDB_VERSION}/lantern-${LDB_VERSION}.tar"
 tar xf "lantern-${LDB_VERSION}.tar"
 cd "lantern-${LDB_VERSION}"
@@ -67,7 +71,7 @@ brew install lantern && lantern_install
 
 - cmake version: >=3.3
 - gcc && g++ version: >=11 when building portable binaries, >= 12 when building on new hardware or with CPU-specific vectorization
-- PostgreSQL 11, 12, 13, 14, 15 or 16
+- PostgreSQL 11, 12, 13, 14, 15, 16, or 17
 - Corresponding development package for PostgreSQL (postgresql-server-dev-$version)
 
 ### Supported platforms
@@ -77,12 +81,25 @@ brew install lantern && lantern_install
 
 ### Installation
 
+To build Lantern on new hardware or with CPU-specific vectorization:
+
 ```bash
 git clone --recursive https://github.com/lanterndata/lantern.git
 cd lantern
 cmake -DMARCH_NATIVE=ON -S lantern_hnsw -B build
 make -C build install -j
 ```
+
+To build portable Lantern binaries:
+
+```bash
+git clone --recursive https://github.com/lanterndata/lantern.git
+cd lantern
+cmake -DMARCH_NATIVE=OFF -S lantern_hnsw -B build
+make -C build install -j
+```
+
+If you have previously cloned Lantern and would like to update, run `git pull && git submodule update --recursive`
 
 ## Post Installation
 
