@@ -24,7 +24,7 @@ You can install the tools individually by following the instructions linked.
 
 ## Overview
 
-Here is a non-comprehensive overview of what you can do with Lantern. The examples below use SQL, but we also provide examples for [Python](/docs/languages/python), [JavaScript](/docs/languages/javascript), and [Rust](/docs/languages/rust).
+Here is a non-comprehensive overview of what you can do with Lantern. The examples below use SQL, but we also provide examples for [Python](/docs/languages/python), [JavaScript](/docs/languages/javascript), [Ruby](/docs/languages/ruby), and [Rust](/docs/languages/rust).
 
 Create a table with an embedding column
 
