@@ -21,47 +21,61 @@ Connect to database and store / query vectors
 ```python
 import psycopg2
 
-conn = psycopg2.connect(DATABASE_URL)
-cur = conn.cursor()
+with psycopg2.connect(DATABASE_URL) as conn:
+    with conn.cursor() as cur:
 
-# Insert a vector
-cur.execute("INSERT INTO books (book_embedding) VALUES (%s)", (embedding,))
+        # Enable the extension
+        cur.execute('CREATE EXTENSION IF NOT EXISTS lantern')
 
-# Find nearest rows to a vector
-cur.execute(f"SELECT * FROM books ORDER BY book_embedding <-> %s LIMIT 5", (embedding,))
+        # Create a table
+        cur.execute('CREATE TABLE IF NOT EXISTS items (id bigserial PRIMARY KEY, embedding REAL[3])')
+        conn.commit()
 
-# Find nearest rows to a vector generated from text
-cur.execute(f"SELECT * FROM books ORDER BY book_embedding <-> text_embedding('BAAI/bge-small-en', %s) LIMIT 5", (query,))
+        # Insert a vector
+        cur.execute("INSERT INTO books (book_embedding) VALUES (%s)", (embedding,))
+        conn.commit()
 
-cur.close()
-conn.close()
+        # Find nearest rows to a vector
+        cur.execute("SELECT * FROM books ORDER BY book_embedding <-> %s LIMIT 5", (embedding,))
+        nearest_rows = cur.fetchall()
+
+        # Find nearest rows to a vector generated from text
+        cur.execute("SELECT * FROM books ORDER BY book_embedding <-> text_embedding('BAAI/bge-small-en', %s) LIMIT 5", (query,))
+        nearest_rows = cur.fetchall()
 ```
 
 ## psycopg3
 
-Enable the extension
+Install `psycopg3`
 
-```python
-conn.execute('CREATE EXTENSION IF NOT EXISTS lantern')
+```bash
+pip install psycopg[binary]
 ```
 
-Create a table
+Connect to the database and store / query vectors
 
 ```python
-conn.execute('CREATE TABLE items (id bigserial PRIMARY KEY, embedding REAL[3])')
-```
+import psycopg
 
-Insert a vector
+with psycopg.connect(DATABASE_URL, autocommit=True) as conn:
+    with conn.cursor() as cur:
 
-```python
-embedding = [1, 2, 3]
-conn.execute('INSERT INTO items (embedding) VALUES (%s)', (embedding,))
-```
+        # Enable the extension
+        cur.execute('CREATE EXTENSION IF NOT EXISTS lantern')
 
-Get the nearest neighbors to a vector
+        # Create a table
+        conn.execute('CREATE TABLE items (id bigserial PRIMARY KEY, embedding REAL[3])')
 
-```python
-conn.execute('SELECT * FROM items ORDER BY embedding <-> %s LIMIT 5', (embedding,)).fetchall()
+        # Insert a vector
+        cur.execute("INSERT INTO books (book_embedding) VALUES (%s)", (embedding,))
+
+        # Find nearest rows to a vector
+        cur.execute("SELECT * FROM books ORDER BY book_embedding <-> %s LIMIT 5", (embedding,))
+        nearest_rows = cur.fetchall()
+
+        # Find nearest rows to a vector generated from text
+        cur.execute("SELECT * FROM books ORDER BY book_embedding <-> text_embedding('BAAI/bge-small-en', %s) LIMIT 5", (query,))
+        nearest_rows = cur.fetchall()
 ```
 
 ## asyncpg
@@ -75,20 +89,35 @@ pip install asyncpg
 Connect to database and store / query vectors
 
 ```python
+import asyncio
 import asyncpg
 
-conn = await asyncpg.connect(DATABASE_URL)
+async def main():
+    conn = await asyncpg.connect(DATABASE_URL)
+    try:
+        # Enable the extension
+        await conn.execute('CREATE EXTENSION IF NOT EXISTS lantern')
 
-# Insert a vector
-await conn.execute("INSERT INTO books (book_embedding) VALUES ($1)", embedding)
+        # Create a table
+        await conn.execute('CREATE TABLE IF NOT EXISTS items (id bigserial PRIMARY KEY, embedding REAL[3])')
 
-# Find nearest rows to a vector
-await conn.fetch(f"SELECT * FROM books ORDER BY book_embedding <-> $1 LIMIT 5", embedding)
+        # Insert a vector
+        await conn.execute("INSERT INTO books (book_embedding) VALUES ($1)", embedding)
 
-# Find nearest rows to a vector generated from text
-await conn.fetch(f"SELECT * FROM books ORDER BY book_embedding <-> text_embedding('BAAI/bge-small-en', $1) LIMIT 5", query)
+        # Find nearest rows to a vector
+        nearest_rows = await conn.fetch("SELECT * FROM books ORDER BY book_embedding <-> $1 LIMIT 5", embedding)
 
-await conn.close()
+        # Find nearest rows to a vector generated from text
+        nearest_text_rows = await conn.fetch(
+            "SELECT * FROM books ORDER BY book_embedding <-> text_embedding('BAAI/bge-small-en', $1) LIMIT 5",
+            query
+        )
+    finally:
+        # Close the connection
+        await conn.close()
+
+# Run the async function
+asyncio.run(main())
 ```
 
 ## Lantern Python Client
