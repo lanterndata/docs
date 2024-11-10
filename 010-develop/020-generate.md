@@ -34,10 +34,11 @@ ALTER ROLE [YOUR_USERNAME] SET lantern_extras.cohere_token='[YOUR_API_KEY]';
 SELECT pg_reload_conf(); 
 ```
 
-To generate an embedding for the text `My text input` using the Cohere embedding model `cohere/embed-english-v3.0`, run
+Use the `cohere_embedding` function to generate text embeddings using the Cohere embedding models. This function accepts a model name and text input as arguments, and an optional input type argument with values `search_document` or `search_query`.
 
 ```sql
 SELECT cohere_embedding('cohere/embed-english-v3.0', 'My text input');
+SELECT cohere_embedding('cohere/embed-english-v3.0', 'My text input', 'search_document');
 ```
 
 The following embedding models are supported
